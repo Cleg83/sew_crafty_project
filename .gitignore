@@ -7,3 +7,6 @@ __pycache__/
 node_modules/
 .github/
 cloudinary_python.txt
+sew_crafty/__pycache__
+env.py
+db.sqlite3
