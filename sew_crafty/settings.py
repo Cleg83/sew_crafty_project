@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # sew_crafty_project apps
     'home',
     'events',
+    'shop',
 ]
 
 MIDDLEWARE = [
