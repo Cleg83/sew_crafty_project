@@ -14,6 +14,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="col mb-3">
+            <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-start">
+                <input class="form-control w-25" type="text" name="q" placeholder="Search shop..." aria-label="Search">
+                <button class="btn back-button ms-2" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         {% for shop_item in shop_items %}
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow-lg hover-zoom">
@@ -29,7 +37,11 @@
                         <div class="col-md-8">
                             <div class="card-body text-dark">
                                 <h5 class="card-title">{{ shop_item.name }}</h5>
-                                <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                                {% if shop_item.in_stock %}
+                                    <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                                {% else %}
+                                    <p class="text-danger">Out of stock</p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
