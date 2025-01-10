@@ -49,7 +49,7 @@
                                     <div id="ticket-info">
                                         <p>A ticket is required for this event!</p>
                                         {% if event.ticket_url %}
-                                            <a href="{{ event.ticket_url }}" target="_blank" class="btn btn-success" role="button">Buy Here</a>
+                                            <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">Buy Here</a>
                                         {% else %}
                                             <p>Tickets to be purchased on arrival</p>                               
                                         {% endif %}
