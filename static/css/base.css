@@ -1,0 +1,177 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.font-large {
+    font-size: 1.5rem;
+}
+
+.heading-rule {
+    width: 25%;
+}
+
+.small-hr {
+    width: 15%;
+}
+
+.bold-font {
+    font-weight: bold;
+}
+
+#nav-logo {
+    height:40px;
+    width: auto;
+}
+
+/* Container to hold the background image */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Ensures no overflow from scaling */
+    z-index: -1; /* Sends the background behind other content */
+}
+
+/* Background image element */
+.home-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/media/stall.jpg') no-repeat center center;
+    background-size: cover; /* Ensures the image covers the container */
+    transform: scale(1); /* Initial scale */
+    animation: scaleBackground 5s ease-in-out forwards; /* Apply scale animation */
+}
+
+.shop-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+.background-no-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* Keyframes for scaling */
+@keyframes scaleBackground {
+    0% {
+        transform: scale(1); /* Start at original size */
+    }
+    100% {
+        transform: scale(1.1); /* Slightly expand the image */
+    }
+}
+
+/* .message-container {
+    margin-top: 80px;
+    z-index: 99999999999;
+} */
+
+.navbar-toggler {
+    background-color: #f8f9fa;
+}
+
+.dropdown-menu {
+    background-color: #000;
+}
+
+.dropdown-menu a:hover,
+.navbar-nav a:hover {
+    background-color: #484747;
+}
+
+#delivery-banner {
+    margin-top: 56px;
+}
+
+.container-top-margin {
+    margin-top: 25px;
+}
+
+.container-top-margin-lg {
+    margin-top: 80px;
+}
+
+#events_list_link {
+    position: relative;
+    z-index: 9999;
+}
+
+.carousel-caption {
+    background-color: #000;
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+#event-title {
+    margin-top: 25px;
+}
+
+.event-description {
+    padding: 10px;
+}
+
+.basket-button {
+    border: 1px solid #000;
+}
+
+.update-button {
+    border: none;
+    background: none;
+}
+
+.update-button small:hover {
+    color: #212529;
+}
+
+.basket-item-link {
+    text-decoration: none;
+}
+
+.basket-img {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    margin-left: 25px;
+}
+
+.basket-icon:hover {
+    color: #dc3545;
+}
+
+.dark-button {
+    background-color: #212529;
+    color: #fff;
+}
+
+.dark-button:hover {
+    background-color: #fff;
+    color: #212529;
+    border: 1px solid #212529;
+}
+
+.success-container {
+    width: 75%;
+    margin-right: auto;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
