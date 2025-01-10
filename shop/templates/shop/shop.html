@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title_addition %} - Shop{% endblock %}
+{% load static %}
+
+{% block content %}
+
+{% include 'includes/delivery_banner.html' %}
+
+<div class="container-fluid container-top-margin">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-dark">Shop</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+    <div class="row">
+        {% for shop_item in shop_items %}
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow-lg hover-zoom">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-md-4">
+                            <a href="{% url 'shop_item_info' shop_item.id %}">
+                                <img 
+                                    class="card-img img-fluid shop_card_img" 
+                                    src="{{ shop_item.image.url }}" 
+                                    alt="{{ shop_item.name }}">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-dark">
+                                <h5 class="card-title">{{ shop_item.name }}</h5>
+                                <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

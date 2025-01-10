@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title_addition %} - Shop{% endblock %}
+{% load static %}
+
+{% block content %}
+
+{% include 'includes/delivery_banner.html' %}
+
+    <div class="container-fluid container-top-margin">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <img class="img-fluid rounded shadow mb-4" src="{{ shop_item.image.url }}" alt="{{ shop_item.name }}">
+                <h1>{{ shop_item.name }}</h1>
+                <p class="lead">£{{ shop_item.price }}</p>
+                <p>{{ shop_item.description }}</p>
+                <form class="form mt-4 d-inline-block" action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <input class="form-control d-inline w-25" type="number" name="quantity" value="1" min="1" max="99" id="id_qty_{{ shop_item.id }}">
+                    </div>
+                    <input type="submit" class="btn forward-button text-uppercase" value="Add to Basket">
+                    <a href="{% url 'shop' %}" class="btn back-button text-uppercase">Continue Shopping</a>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
