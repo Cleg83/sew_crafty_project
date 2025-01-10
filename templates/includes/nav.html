@@ -1,68 +1,58 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-dark bg-gradient">
-    <div class="container-fluid">   
-        <div class="d-flex justify-content-start">
+    <div class="container-fluid">
+        <!-- Brand and Logo -->
         <a class="navbar-brand text-light p-0" href="{% url 'home' %}">
-            <img id="nav-logo" src="{{ MEDIA_URL }}logo.jpg" alt="Logo">
-        </a> 
-        </div>
-        <div class="d-flex justify-content-center">
-        <form method="GET" action="" class="d-flex">
-            <input class="form-control me-2" type="text" name="q" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>     
-        </div>  
-        <div class="d-flex justify-content-end">
+            <img id="nav-logo" src="{{ MEDIA_URL }}logo.jpg" alt="Logo" height="40">
+        </a>
+
+        <!-- Toggler for mobile view -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#crafty_navbar" aria-controls="crafty_navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="fa-solid fa-bars"></i></span>
         </button>
+
+        <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="crafty_navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Home Link -->
                 <li class="nav-item">
                     <a class="nav-link active text-light" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
+
+                <!-- Shop Link -->
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{% url 'shop' %}">Shop</a>
                 </li>
+
+                <!-- More Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         More
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item text-light" href="{% url 'events' %}">Upcoming Events</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-light" href="#">About</a></li>
                         {% if request.user.is_authenticated %}
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-light" href="">View Profile</a></li>
                             {% if request.user.is_superuser %}
-                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-light" href="">Manage Shop</a></li>
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item text-light" href="">Logout</a>
-                            </li>
+                            <li><a class="dropdown-item text-light" href="">Logout</a></li>
                         {% else %}
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item text-light" href="">Login / Create Account</a>
-                            </li>
+                            <li><a class="dropdown-item text-light" href="">Login / Create Account</a></li>
                         {% endif %}
                     </ul>
                 </li>
+
+                <!-- Cart Icon and Total -->
                 <li class="nav-item">
                     <a class="nav-link text-light" href="">
+                        <i class="icon fa-solid fa-basket-shopping"></i>
                         {% if item_count %}
-                            <i class="icon fa-solid fa-basket-shopping"></i>
                             <span><small class="text-light"> £{{ grand_total|floatformat:2 }}</small></span>
-                        {% else %}
-                            <i class="icon fa-solid fa-basket-shopping"></i>
                         {% endif %}
                     </a>
                 </li>
-            </ul>		
+            </ul>
         </div>
-        </div>       
     </div>
 </nav>
-</div>
