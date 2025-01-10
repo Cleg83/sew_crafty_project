@@ -130,6 +130,13 @@ body {
     padding: 10px;
 }
 
+.shop_card_img {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image maintains its aspect ratio and fills the dimensions */
+    border-radius: 5px; /* Optional: Adds a subtle rounding to the corners */
+}
+
 .basket-button {
     border: 1px solid #000;
 }
@@ -158,12 +165,23 @@ body {
     color: #dc3545;
 }
 
-.dark-button {
+.forward-button {
+    background-color: #28a745; /* Green for action-forward buttons */
+    color: #fff;
+}
+
+.forward-button:hover {
+    background-color: #fff;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.back-button {
     background-color: #212529;
     color: #fff;
 }
 
-.dark-button:hover {
+.back-button:hover {
     background-color: #fff;
     color: #212529;
     border: 1px solid #212529;
