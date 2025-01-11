@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title_addition %} - Basket{% endblock %}
+{% load static %}
+{% load get_subtotal %}
+
+{% block content %}
+
+{% include 'includes/delivery_banner.html' %}
+
+<div class="background-container">
+    <div class="background-no-image"></div>
+</div>
+
+<div class="container-fluid container-top-margin">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-dark">Your Basket</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            {% if basket_items %}
+                <div class="table-responsive shadow-sm">
+                    <table class="table table-bordered custom-table">
+                        <thead class="bg-dark text-light">
+                            <tr>
+                                <th scope="col" class="align-middle">Product</th>
+                                <th scope="col" class="text-center align-middle">Price</th>
+                                <th scope="col" class="text-center align-middle">Quantity</th>
+                                <th scope="col" class="text-center align-middle">Subtotal</th>
+                                <th scope="col" class="text-center align-middle">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in basket_items %}
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="{{ item.shop_item.image.url }}" alt="{{ item.shop_item.name }}" class="basket-img rounded">
+                                        <span class="ms-3">{{ item.shop_item.name }}</span>
+                                    </td>
+                                    <td class="text-center align-middle">£{{ item.shop_item.price|floatformat:2 }}</td>
+                                    <td class="text-center align-middle">
+                                        <form action="{% url 'adjust_basket' item.item_id %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="form-control d-inline w-50">
+                                            <button type="submit" class="btn update-button btn-sm">Update</button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center align-middle">£{{ item.shop_item.price|get_subtotal:item.quantity|floatformat:2 }}</td>
+                                    <td class="text-center align-middle">
+                                        <form action="{% url 'delete_from_basket' item.shop_item.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn delete-button btn-sm">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="lead mb-5">Your basket is empty. <a href="{% url 'shop' %}">Continue shopping</a>.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            {% if basket_items %}
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Order Summary</h5>
+                        <hr>
+                        <p class="d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span>£{{ total|floatformat:2 }}</span>
+                        </p>
+                        <p class="d-flex justify-content-between">
+                            <span>Delivery:</span>
+                            <span>£{{ delivery|floatformat:2 }}</span>
+                        </p>
+                        <hr>
+                        <h5 class="d-flex justify-content-between">
+                            <span>Total:</span>
+                            <span>£{{ grand_total|floatformat:2 }}</span>
+                        </h5>
+                        {% if free_delivery_prompt != 0 %}
+                            <p>Spend £{{ free_delivery_prompt }} more to qualify for free delivery!</p>
+                        {% endif %}
+                        <a href="" class="btn forward-button btn-block mt-3">Proceed to Checkout</a>
+                        <a href="{% url 'shop' %}" class="btn back-button btn-block mt-3">Continue Shopping</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
