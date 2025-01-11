@@ -88,11 +88,6 @@ body {
     }
 }
 
-/* .message-container {
-    margin-top: 80px;
-    z-index: 99999999999;
-} */
-
 .navbar-toggler {
     background-color: #f8f9fa;
 }
@@ -149,13 +144,6 @@ body {
     vertical-align: middle !important;  /* Ensures vertical centering */
 }
 
-/* Table styling */
-.custom-table {
-    border-radius: 5px;
-    overflow: hidden;
-    border: 1px solid #ddd; /* Optional for cleaner borders */
-}
-
 /* Buttons */
 
 .forward-button {
@@ -202,18 +190,27 @@ body {
     border: 1px solid var(--red);
 }
 
+/* Table styling */
+.basket-table {
+    border-collapse: separate;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
 .basket-item-link {
     text-decoration: none;
+    color: var(--blue);
+}
+
+.basket-item-link:hover {
+    color: var(--green);
 }
 
 .basket-img {
     max-width: 60px; /* Adjust size of images */
     height: auto;
     margin-right: 10px;
-}
-
-.basket-icon:hover {
-    color: var(--red);
 }
 
 .success-container {

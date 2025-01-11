@@ -22,23 +22,25 @@
     <div class="row">
         <div class="col-lg-8">
             {% if basket_items %}
-                <div class="table-responsive shadow-sm">
-                    <table class="table table-bordered custom-table">
+                <div class="table-responsive shadow-sm basket-table">
+                    <table class="table table-bordered">
                         <thead class="bg-dark text-light">
                             <tr>
                                 <th scope="col" class="align-middle">Product</th>
                                 <th scope="col" class="text-center align-middle">Price</th>
                                 <th scope="col" class="text-center align-middle">Quantity</th>
                                 <th scope="col" class="text-center align-middle">Subtotal</th>
-                                <th scope="col" class="text-center align-middle">Actions</th>
+                                <th scope="col" class="text-center align-middle">Remove</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in basket_items %}
                                 <tr>
                                     <td class="align-middle">
-                                        <img src="{{ item.shop_item.image.url }}" alt="{{ item.shop_item.name }}" class="basket-img rounded">
-                                        <span class="ms-3">{{ item.shop_item.name }}</span>
+                                        <a href="{% url 'shop_item_info' item.shop_item.id %}" class="basket-item-link">
+                                            <img src="{{ item.shop_item.image.url }}" alt="{{ item.shop_item.name }}" class="basket-img rounded">
+                                            <span class="ms-3">{{ item.shop_item.name }}</span>
+                                        </a>
                                     </td>
                                     <td class="text-center align-middle">£{{ item.shop_item.price|floatformat:2 }}</td>
                                     <td class="text-center align-middle">
@@ -61,7 +63,8 @@
                     </table>
                 </div>
             {% else %}
-                <p class="lead mb-5">Your basket is empty. <a href="{% url 'shop' %}">Continue shopping</a>.</p>
+                <p class="lead mb-3">Your basket is empty.</p>
+                <a href="{% url 'shop' %}" class="btn back-button">Continue shopping</a>
             {% endif %}
         </div>
 
@@ -84,8 +87,10 @@
                             <span>Total:</span>
                             <span>£{{ grand_total|floatformat:2 }}</span>
                         </h5>
-                        {% if free_delivery_prompt != 0 %}
-                            <p>Spend £{{ free_delivery_prompt }} more to qualify for free delivery!</p>
+                        {% if free_delivery_prompt != 0 and free_delivery_prompt > 1 %}
+                            <p>Add {{ free_delivery_prompt }} more items to qualify for free delivery!</p>
+                        {% elif free_delivery_prompt == 1 %}
+                            <p>Add {{ free_delivery_prompt }} more item to qualify for free delivery!</p>
                         {% endif %}
                         <a href="" class="btn forward-button btn-block mt-3">Proceed to Checkout</a>
                         <a href="{% url 'shop' %}" class="btn back-button btn-block mt-3">Continue Shopping</a>
