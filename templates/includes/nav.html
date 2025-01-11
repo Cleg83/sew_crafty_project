@@ -45,7 +45,7 @@
 
                 <!-- Cart Icon and Total -->
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="">
+                    <a class="nav-link text-light" href="{% url 'view_basket' %}">
                         <i class="icon fa-solid fa-basket-shopping"></i>
                         {% if item_count %}
                             <span><small class="text-light"> £{{ grand_total|floatformat:2 }}</small></span>
