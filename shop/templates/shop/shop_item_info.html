@@ -13,7 +13,7 @@
                 <h1>{{ shop_item.name }}</h1>
                 <p class="lead">£{{ shop_item.price }}</p>
                 <p>{{ shop_item.description }}</p>
-                <form class="form mt-4 d-inline-block" action="" method="POST">
+                <form class="form mt-4 d-inline-block" action="{% url 'add_to_basket' shop_item.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group mb-4">
                         <input class="form-control d-inline w-25" type="number" name="quantity" value="1" min="1" max="99" id="id_qty_{{ shop_item.id }}">
