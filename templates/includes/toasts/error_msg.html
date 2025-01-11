@@ -1,11 +1,11 @@
-<div id="delivery-banner" class="row text-center">
-    <div class="col {% if not on_shop_page %}bg-dark text-light{% else %}bg-light text-dark{% endif %}">
-        {% if free_delivery_prompt == 0 %}
-            <h4 class="my-1">You have qualified for free delivery!</h4>
-        {% elif free_delivery_prompt == 1 %}
-            <h4 class="my-1">Free delivery if you order {{ free_delivery_prompt }} more item!</h4>
-        {% else %}
-            <h4 class="my-1">Free delivery if you order {{ free_delivery_prompt }} more items!</h4>
-        {% endif %}
-    </div>            
-</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-danger">
+        <strong class="me-auto">Error!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          {{ message }}  
+      </div>
+    </div>
+  </div>
