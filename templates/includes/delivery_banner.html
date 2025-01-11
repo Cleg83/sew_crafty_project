@@ -4,8 +4,10 @@
             <h4 class="my-1">You have qualified for free delivery!</h4>
         {% elif free_delivery_prompt == 1 %}
             <h4 class="my-1">Free delivery if you order {{ free_delivery_prompt }} more item!</h4>
-        {% else %}
+        {% elif free_delivery_prompt == 2 %}
             <h4 class="my-1">Free delivery if you order {{ free_delivery_prompt }} more items!</h4>
+        {% else %}
+            <h4 class="my-1">Free delivery if you order {{ free_delivery_prompt }} items!</h4>
         {% endif %}
     </div>            
 </div>
