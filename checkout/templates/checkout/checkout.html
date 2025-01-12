@@ -3,15 +3,42 @@
 {% load static %}
 
 {% block content %}
-
-{% include 'includes/delivery_banner.html' %}
-
-<div class="container-fluid container-top-margin">
+<div class="container-fluid container-top-margin-lg">
     <div class="row">
         <div class="col">
-            <h2 class="text-dark">Checkout</h2>
+            <h2 class="text-uppercase">Checkout</h2>
             <hr class="heading-rule">
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Your Basket</h4>
+            <ul class="list-group">
+                {% for item in basket_items %}
+                    <li class="list-group-item">
+                        <strong>{{ item.shop_item.name }}</strong> ({{ item.quantity }}) - £{{ item.shop_item.price }} each
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h4>Total Cost: £{{ grand_total | floatformat:2 }}</h4>
+            {% if free_delivery_prompt > 1 %}
+                <p>You need {{ free_delivery_prompt }} more items to qualify for free delivery.</p>
+            {% elif free_delivery_prompt > 1 %}
+                <p>You need {{ free_delivery_prompt }} more item to qualify for free delivery.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h4>Your Details</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ order_form.as_p }}
+                <button type="submit" class="btn forward-button">Place Order</button>
+                <a href="{% url 'view_basket' %}" class="btn back-button ms-2">Back to basket</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
