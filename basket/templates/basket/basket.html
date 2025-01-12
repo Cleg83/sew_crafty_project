@@ -7,9 +7,9 @@
 
 {% include 'includes/delivery_banner.html' %}
 
-<div class="background-container">
+<!-- <div class="background-container">
     <div class="background-no-image"></div>
-</div>
+</div> -->
 
 <div class="container-fluid container-top-margin">
     <div class="row">
@@ -92,7 +92,7 @@
                         {% elif free_delivery_prompt == 1 %}
                             <p>Add {{ free_delivery_prompt }} more item to qualify for free delivery!</p>
                         {% endif %}
-                        <a href="" class="btn forward-button btn-block mt-3">Proceed to Checkout</a>
+                        <a href="{% url 'checkout' %}" class="btn forward-button btn-block mt-3">Proceed to Checkout</a>
                         <a href="{% url 'shop' %}" class="btn back-button btn-block mt-3">Continue Shopping</a>
                     </div>
                 </div>

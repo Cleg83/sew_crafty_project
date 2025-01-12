@@ -3,33 +3,54 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid container-top-margin-lg">
-        <div class="row">
-            <div class="col">
-                <h2>Events</h2>
-                <a href="{% url 'events' %}"><small>View Events Carousel</small></a>
-                <hr>
-            </div>
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <div class="col">
+            <h2>Events</h2>
+            <a href="{% url 'events' %}" class="basket-item-link">
+                <small>View Events Carousel</small>
+            </a>
+            <hr class="heading-rule">
         </div>
     </div>
 
-    {% for event in events %}
-        <div class="row">
-            <div class="col-12 col-sm-4">
-                <h4>{{ event.name }}</h4>
-                <p>{{ event.location }}</p>
-                <p>{{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}</p>
-                <p>{{ event.start_time }}{% if event.end_time %} - {{ event.end_time }}{% endif %}</p>
+    <div class="row gy-4">
+        {% for event in events %}
+        <div class="col-12">
+            <div class="card shadow-sm rounded border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h4 class="card-title text-uppercase">{{ event.name }}</h4>
+                            <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
+                            <p class="card-text">
+                                <strong>Dates:</strong> {{ event.start_date }}
+                                {% if event.end_date %}
+                                - {{ event.end_date }}
+                                {% endif %}
+                            </p>
+                            <p class="card-text">
+                                <strong>Time:</strong> {{ event.start_time }}
+                                {% if event.end_time %}
+                                - {{ event.end_time }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <p class="card-text"><strong>Description:</strong></p>
+                            <p class="card-text">{{ event.description }}</p>
+                        </div>
+                        <div class="col-12 col-md-4 text-center text-md-start">
+                            <p class="card-text text-danger"><strong>A ticket is required for this event</strong></p>
+                            <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">
+                                Buy Tickets
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 col-sm-4">
-                <p>{{ event.description }}</p>
-            </div>
-            <div class="col-12 col-sm-4">
-                <p>A ticket is required for this event</p>
-                <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">Buy Here</a>
-            </div>
-        </div>       
-        <hr>
-    {% endfor %}
-
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -19,7 +19,7 @@
                               <span class="text-uppercase">View basket</span>
                           </a>
                       {% else %}
-                          <a href="" class="btn btn-sm forward-button">
+                          <a href="{% url 'checkout' %}" class="btn btn-sm forward-button">
                               <span class="text-uppercase">Checkout</span>
                           </a>
                       {% endif %}
