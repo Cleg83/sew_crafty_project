@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title_addition %} - User Profile{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid container-top-margin">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-dark">Your Profile</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Left Column: Address Form -->
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Personal Details</legend>
+                    {{ user_profile_form.default_first_name | as_crispy_field }}
+                    {{ user_profile_form.default_last_name | as_crispy_field }}
+                    {{ user_profile_form.default_email | as_crispy_field }}
+                    {{ user_profile_form.default_phone_number | as_crispy_field }}
+                </fieldset>
+            
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Address Details</legend>
+                    {{ user_profile_form.default_address_1 | as_crispy_field }}
+                    {{ user_profile_form.default_address_2 | as_crispy_field }}
+                    {{ user_profile_form.default_town | as_crispy_field }}
+                    {{ user_profile_form.default_county | as_crispy_field }}
+                    {{ user_profile_form.default_postcode | as_crispy_field }}
+                    {{ user_profile_form.default_country | as_crispy_field }}
+                </fieldset>
+                
+                <button type="submit" class="btn forward-button">Save</button>
+            </form>
+        </div>
+
+        <!-- Right Column: Order History -->
+        <div class="col-md-6">
+            <h4>Order History</h4>
+            {% if order_history %}
+                <ul class="list-group">
+                    {% for order in order_history %}
+                        <li class="list-group-item">
+                            <strong>Order #{{ order.order_number }}</strong><br>
+                            Date: {{ order.date }}<br>
+                            Total: £{{ order.grand_total }}<br>
+                            <a href="" class="dark-blue-link">View Details</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You haven't placed any orders yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
