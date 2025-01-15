@@ -31,7 +31,7 @@ def add_to_basket(request, item_id):
         quantity = int(request.POST.get('quantity', 1))
     except ValueError:
         messages.error(request, "Invalid quantity specified.")
-        return redirect(reverse('shop_item_info', args=[item_id]))  # redirect to the shop item page
+        return redirect(reverse('shop_item_info', args=[item_id]))  
 
     # If redirect_url is not passed, default to the basket page
     redirect_url = request.POST.get('redirect_url', reverse('view_basket'))
@@ -48,9 +48,7 @@ def add_to_basket(request, item_id):
 
     # Add success message
     messages.success(request, f'{shop_item.name} added to your basket!')
-
-    # To avoid recursion, ensure we only redirect to the page we want
-    return redirect(redirect_url)  # Redirect either to basket or the original page
+    return redirect(redirect_url)  
 
 
 def adjust_basket(request, item_id):
@@ -63,7 +61,7 @@ def adjust_basket(request, item_id):
             raise ValueError
     except ValueError:
         messages.error(request, "Invalid quantity specified.")
-        return redirect(reverse('view_basket'))  # redirect to the basket page
+        return redirect(reverse('view_basket'))  
 
     basket = get_basket(request)
     if str(item_id) in basket:
@@ -73,9 +71,7 @@ def adjust_basket(request, item_id):
 
     save_basket(request, basket)
     messages.success(request, f'Updated {shop_item.name} quantity to {quantity}.')
-
-    # Avoid recursion by redirecting cleanly
-    return redirect(reverse('view_basket'))  # Redirect to the basket page
+    return redirect(reverse('view_basket')) 
 
 
 def delete_from_basket(request, item_id):
@@ -89,6 +85,4 @@ def delete_from_basket(request, item_id):
         messages.success(request, f'{shop_item.name} removed from your basket.')
     else:
         messages.warning(request, f'{shop_item.name} was not found in your basket.')
-
-    # To avoid recursion and infinite redirects, redirect only to the basket page
-    return redirect(reverse('view_basket'))  # Redirect to the basket page
+    return redirect(reverse('view_basket'))  
