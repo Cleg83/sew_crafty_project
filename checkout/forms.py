@@ -49,7 +49,6 @@ class OrderForm(forms.ModelForm):
             },
         }
 
-        # Loop through each field to apply custom options
         for field_name, options in self.field_options.items():
             if field_name in self.fields:
                 field = self.fields[field_name]
@@ -61,9 +60,6 @@ class OrderForm(forms.ModelForm):
                 # Set autofocus on first field
                 if 'autofocus' in options:
                     field.widget.attrs['autofocus'] = 'autofocus'
-
-                # Set CSS class for styling
-                field.widget.attrs['class'] = 'stripe-formatting'
 
                 # Remove the label
                 field.label = False
