@@ -33,7 +33,7 @@
                             {% for item in basket_items %}
                                 <tr>
                                     <td class="align-middle">
-                                        <a href="{% url 'shop_item_info' item.shop_item.id %}" class="basket-item-link">
+                                        <a href="{% url 'shop_item_info' item.shop_item.id %}" class="dark-blue-link">
                                             <img src="{{ item.shop_item.image.url }}" alt="{{ item.shop_item.name }}" class="basket-img rounded">
                                             <span class="ms-3">{{ item.shop_item.name }}</span>
                                         </a>
