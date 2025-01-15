@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title_addition %} - Checkout{% endblock %}
 {% load static %}
 
@@ -12,6 +13,58 @@
     </div>
 
     <div class="row">
+        <div class="col-md-6">
+            <h4>Your Info</h4>
+            <hr class="small-hr">
+            <form action="{% url 'checkout' %}" method="POST" id="checkout-form">
+                {% csrf_token %}
+            
+                <div class="mb-2">
+                    {% if has_saved_address %}
+                        <label for="use_profile_info"><small class="text-muted">Use saved info</small></label>
+                        <input type="checkbox" id="use_profile_info" data-fetch-url="{% url 'user_profile:get_profile_info' %}">
+                    {% endif %}
+                </div>
+            
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Personal Details</legend>
+                    {{ order_form.first_name | as_crispy_field }}
+                    {{ order_form.last_name | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }} 
+                    {{ order_form.phone_number | as_crispy_field }}
+                </fieldset>
+                
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Delivery Details</legend>
+                    {{ order_form.address_1 | as_crispy_field }}
+                    {{ order_form.address_2 | as_crispy_field }}
+                    {{ order_form.town | as_crispy_field }}
+                    {{ order_form.county | as_crispy_field }}
+                    {{ order_form.postcode | as_crispy_field }}
+                    {{ order_form.country | as_crispy_field }}
+                </fieldset>
+
+                {% if not has_saved_address %}
+                    <div class="mb-2">
+                        <label for="save_profile_info"><small class="text-muted">Save address to profile</small></label>
+                        <input type="checkbox" id="save_profile_info" name="save_profile_info">
+                    </div>
+                {% endif %}
+            
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Payment</legend>
+                    <div class="mb-4" id="payment-info-box"></div>
+                    <div class="mb-4 text-danger" id="payment-error-box" role="alert"></div>
+                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                </fieldset>
+            
+                <div id="submit-button" class="mb-3">
+                    <button type="submit" class="btn forward-button">Place Order</button>
+                    <a href="{% url 'view_basket' %}" class="btn back-button ms-2">Back to basket</a>
+                </div>
+            </form>            
+        </div>
+
         <div class="col-md-6">
             <h4>Your Basket</h4>
             <ul class="list-group">
@@ -29,16 +82,14 @@
                 <p>You need {{ free_delivery_prompt }} more item to qualify for free delivery.</p>
             {% endif %}
         </div>
-
-        <div class="col-md-6">
-            <h4>Your Details</h4>
-            <form method="post">
-                {% csrf_token %}
-                {{ order_form.as_p }}
-                <button type="submit" class="btn forward-button">Place Order</button>
-                <a href="{% url 'view_basket' %}" class="btn back-button ms-2">Back to basket</a>
-            </form>
-        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block post_load_js %}
+    {{ block.super }}
+    {{ stripe_public|json_script:"id_stripe_public" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'js/stripe_checkout_elements.js' %}"></script>
+    <script src="{% static 'js/get_profile_info.js' %}"></script>
 {% endblock %}
