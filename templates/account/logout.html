@@ -1,25 +1,36 @@
-{% extends "account/base_manage.html" %}
-{% load allauth i18n %}
-{% block head_title %}
-    {% trans "Sign Out" %}
-{% endblock head_title %}
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load allauth %} 
+
+{% block title_addition %} - {% trans "Sign Out" %}{% endblock %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    {% element p %}
-        {% trans 'Are you sure you want to sign out?' %}
-    {% endelement %}
-    {% url 'account_logout' as action_url %}
-    {% element form method="post" action=action_url no_visible_fields=True %}
-        {% slot body %}
-            {% csrf_token %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" %}
-                {% trans 'Sign Out' %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-{% endblock content %}
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-uppercase">{% trans "Sign Out" %}</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>{% trans "Are you sure you want to sign out?" %}</p>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <div class="d-grid">
+                    <button type="submit" class="btn forward-button">{% trans 'Sign Out' %}</button>
+                </div>
+            </form>
+            <p class="mt-3">
+                <a class="dark-blue-link" href="{% url 'home' %}">{% trans "Cancel" %}</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
