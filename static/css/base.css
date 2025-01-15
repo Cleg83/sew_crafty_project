@@ -189,12 +189,12 @@ body {
     border: 1px solid #ddd;
 }
 
-.basket-item-link {
+.dark-blue-link {
     text-decoration: none;
     color: var(--blue);
 }
 
-.basket-item-link:hover {
+.dark-blue-link:hover {
     color: var(--green);
 }
 
@@ -209,4 +209,10 @@ body {
     margin-right: auto;
     border: 2px solid #000;
     border-radius: 5px;
+}
+
+/* Allauth */
+
+#id_password_helptext {
+    display: none;
 }
