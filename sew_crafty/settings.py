@@ -124,13 +124,51 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-ACCOUNT_USERNAME_MIN_LENGTH = 6
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+# Account settings
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email' 
+ACCOUNT_EMAIL_REQUIRED = True  
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True 
+ACCOUNT_USERNAME_MIN_LENGTH = 6  
+
+# Redirect settings after login and logout
+LOGIN_URL = '/accounts/login/'  
+LOGIN_REDIRECT_URL = '/'  
+
+# Social account settings
+SOCIALACCOUNT_LOGIN_ON_GET = True  
+SOCIALACCOUNT_EMAIL_REQUIRED = True  
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
+
+# Social account providers
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'METHOD': 'oauth2',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v10.0',
+    },
+    'google': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'OAUTH_PKCE_ENABLED': True,
+    },
+    'instagram': {
+        'SCOPE': ['basic'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+    },
+    'twitter': {
+        'SCOPE': ['email'],
+    },
+    'twitter_oauth2': {
+        'SCOPE': ['email'],
+    },
+}
+
+# For login forms and redirect URLs
+ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'  
+LOGOUT_REDIRECT_URL = '/'  
 
 
 # Database
@@ -186,6 +224,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FREE_DELIVERY_ITEM_THRESHOLD = 3
 STANDARD_DELIVERY_COST = 3.99
+
+STRIPE_CURRENCY = 'gbp'
+STRIPE_PUBLIC = env.STRIPE_PUBLIC
+STRIPE_SECRET = env.STRIPE_SECRET
+STRIPE_WH_SECRET = env.STRIPE_WH_SECRET
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
