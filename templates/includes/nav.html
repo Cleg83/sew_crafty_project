@@ -31,19 +31,19 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item text-light" href="{% url 'events' %}">Upcoming Events</a></li>
                         {% if request.user.is_authenticated %}
-                            <li><a class="dropdown-item text-light" href="">View Profile</a></li>
+                            <li><a class="dropdown-item text-light" href="{% url 'user_profile:user_profile' %}">View Profile</a></li> 
                             {% if request.user.is_superuser %}
-                                <li><a class="dropdown-item text-light" href="">Manage Shop</a></li>
+                                <li><a class="dropdown-item text-light" href="">Manage Shop</a></li> 
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-light" href="">Logout</a></li>
+                            <li><a class="dropdown-item text-light" href="{% url 'account_logout' %}">Logout</a></li>
                         {% else %}
-                            <li><a class="dropdown-item text-light" href="">Login / Create Account</a></li>
+                            <li><a class="dropdown-item text-light" href="{% url 'account_login' %}">Login / Create Account</a></li>
                         {% endif %}
                     </ul>
                 </li>
 
-                <!-- Cart Icon and Total -->
+                <!-- Basket Icon and Total -->
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{% url 'view_basket' %}">
                         <i class="icon fa-solid fa-basket-shopping"></i>
@@ -56,3 +56,5 @@
         </div>
     </div>
 </nav>
+
+
