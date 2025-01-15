@@ -6,49 +6,87 @@
 
 {% include 'includes/delivery_banner.html' %}
 
-<div class="container-fluid container-top-margin">
-    <div class="row">
-        <div class="col">
-            <h2 class="text-dark">Shop</h2>
-            <hr class="heading-rule">
+    <div class="container-fluid container-top-margin">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-dark">Shop</h2>
+                <hr class="heading-rule">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col mb-3">
-            <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-start">
-                <input class="form-control w-25" type="text" name="q" placeholder="Search shop..." aria-label="Search">
-                <button class="btn forward-button ms-2" type="submit">Search</button>
-            </form>
+
+        <!-- Search bar aligned to the left -->
+        <div class="row">
+            <div class="col-md-8 col-lg-4 mb-3">
+                <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-start">
+                    <input 
+                        class="form-control w-100" 
+                        type="text" 
+                        name="q" 
+                        placeholder="Search shop..." 
+                        value="{{ search_criteria|default:'' }}" 
+                        aria-label="Search">
+                    <button class="btn forward-button ms-2" type="submit">Search</button>
+                </form>
+            </div>
+            <!-- Category dropdown aligned to the right -->
+            <div class="col-sm-4 mb-3 ms-auto">
+                <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-end">
+                    <select name="category" class="form-control w-100" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id|stringformat:"s" == category_filter %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        {% for shop_item in shop_items %}
-            <div class="col-12 mb-4">
-                <div class="card border-0 shadow-lg hover-zoom">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col-md-4">
-                            <a href="{% url 'shop_item_info' shop_item.id %}">
-                                <img 
-                                    class="card-img img-fluid shop_card_img" 
-                                    src="{{ shop_item.image.url }}" 
-                                    alt="{{ shop_item.name }}">
-                            </a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-dark">
-                                <h5 class="card-title">{{ shop_item.name }}</h5>
-                                {% if shop_item.in_stock %}
-                                    <p class="card-text text-muted">£{{ shop_item.price }}</p>
-                                {% else %}
-                                    <p class="text-danger">Out of stock</p>
-                                {% endif %}
+
+        <!-- Sorting dropdown in a new row -->
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-start">
+                    <select name="sort" class="form-control w-100" onchange="this.form.submit()">
+                        <option value="">Sort By</option>
+                        <option value="price_low_to_high" {% if sort_by == 'price_low_to_high' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="price_high_to_low" {% if sort_by == 'price_high_to_low' %}selected{% endif %}>Price: High to Low</option>
+                        <option value="name_a_to_z" {% if sort_by == 'name_a_to_z' %}selected{% endif %}>Name: A to Z</option>
+                        <option value="name_z_to_a" {% if sort_by == 'name_z_to_a' %}selected{% endif %}>Name: Z to A</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <!-- Shop Items Display -->
+        <div class="row">
+            {% for shop_item in shop_items %}
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow-lg hover-zoom">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-md-4">
+                                <a href="{% url 'shop_item_info' shop_item.id %}">
+                                    <img 
+                                        class="card-img img-fluid shop_card_img" 
+                                        src="{{ shop_item.image.url }}" 
+                                        alt="{{ shop_item.name }}">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body text-dark">
+                                    <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link">
+                                        <h5 class="card-title">{{ shop_item.name }}</h5>
+                                    </a>
+                                    {% if shop_item.in_stock %}
+                                        <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                                    {% else %}
+                                        <p class="text-danger">Out of stock</p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
 
 {% endblock %}
