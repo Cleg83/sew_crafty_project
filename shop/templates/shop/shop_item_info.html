@@ -11,17 +11,23 @@
             <div class="col-lg-8 text-center">
                 <img class="img-fluid rounded shadow mb-4" src="{{ shop_item.image.url }}" alt="{{ shop_item.name }}">
                 <h1>{{ shop_item.name }}</h1>
-                <p class="lead">£{{ shop_item.price }}</p>
+                {% if shop_item.in_stock %}
+                    <p class="lead">£{{ shop_item.price }}</p>
+                {% else %}
+                    <p class="text-danger">Out of stock</p>
+                {% endif %}
                 <p>{{ shop_item.description }}</p>
-                <form class="form mt-4 d-inline-block" action="{% url 'add_to_basket' shop_item.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group mb-4">
-                        <input class="form-control d-inline w-25" type="number" name="quantity" value="1" min="1" max="99" id="id_qty_{{ shop_item.id }}">
-                    </div>
-                    <input type="submit" class="btn forward-button text-uppercase" value="Add to Basket">
-                    <a href="{% url 'shop' %}" class="btn back-button text-uppercase">Continue Shopping</a>
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                </form>
+                {% if shop_item.in_stock %}
+                    <form class="form mt-4 d-inline-block" action="{% url 'add_to_basket' shop_item.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mb-4">
+                            <input class="form-control d-inline w-25" type="number" name="quantity" value="1" min="1" max="99" id="id_qty_{{ shop_item.id }}">
+                        </div>
+                        <input type="submit" class="btn forward-button text-uppercase" value="Add to Basket">
+                        <a href="{% url 'shop' %}" class="btn back-button text-uppercase">Continue Shopping</a>
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>
