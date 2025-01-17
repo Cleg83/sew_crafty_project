@@ -62,3 +62,19 @@ def shop_item_info(request, shop_item_id):
     }
 
     return render(request, 'shop/shop_item_info.html', context)
+
+
+def manage_shop(request):
+    
+    shop_items = Product.objects.all()
+    categories = Category.objects.all()
+
+    template = 'shop/manage_shop.html'
+
+    context = {
+        'shop_items': shop_items,
+        'categories': categories,
+    }
+
+    return render(request, template, context)
+
