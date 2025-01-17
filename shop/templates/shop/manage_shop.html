@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title_addition %} - Manage Shop{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-dark">Manage Shop</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-3">
+            <h5>Categories</h5>
+            <hr class="heading-rule">
+            {% for category in categories %}
+                <div class="card border-0 shadow-lg hover-zoom">
+                    <div class="card-body text-dark align-items-center">
+                        <a href="" class="dark-blue-link">
+                            <h5 class="card-title">{{ category.name }}</h5>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-6">
+            <h5>Products</h5>
+            <hr class="heading-rule">
+            {% for shop_item in shop_items %}
+                <div class="card border-0 shadow-lg hover-zoom">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-md-4">
+                            <a href=""> 
+                                <img 
+                                    class="card-img img-fluid shop_card_img" 
+                                    src="{{ shop_item.image.url }}" 
+                                    alt="{{ shop_item.name }}">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-dark">
+                                <a href="" class="dark-blue-link">
+                                    <h5 class="card-title">{{ shop_item.name }}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
