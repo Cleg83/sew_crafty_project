@@ -71,7 +71,7 @@
                                 </a>
                             </div>
                             {% if request.user.is_superuser %}
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <div class="card-body text-dark">
                                         <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link">
                                             <h5 class="card-title">{{ shop_item.name }}</h5>
@@ -80,24 +80,20 @@
                                         {% if not shop_item.in_stock %}
                                             <div class="mb-2">
                                                 <p class="mb-0">Currently out of stock</p>
-                                                <label for="not_in_stock"><small class="text-success">Mark as in stock</small></label>
+                                                <label for="not_in_stock"><small>Mark as in stock</small></label>
                                                 <input type="checkbox" id="not_in_stock" name="not_in_stock">
                                             </div>
                                         {% else %}
                                             <div class="mb-2">
                                                 <p class="mb-0">Item in stock</p>
-                                                <label for="is_in_stock"><small class="text-danger">Mark as out of stock</small></label>
+                                                <label for="is_in_stock"><small>Mark as out of stock</small></label>
                                                 <input type="checkbox" id="is_in_stock" name="is_in_stock">
                                             </div>
                                         {% endif %}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <form class="form mt-4 d-inline-block" action="" method="POST">
-                                        {% csrf_token %}
-                                        <input type="submit" class="btn delete-button text-uppercase" value="Delete">
-                                        <a href="{% url 'shop' %}" class="btn forward-button text-uppercase ms-2">Edit</a>
-                                    </form>
+                                <div class="col-md-2">
+                                    <a href="{% url 'edit_shop_item' shop_item.id %}" class="btn forward-button text-uppercase ms-2">Edit Product</a>
                                 </div>
                             {% else %}
                                 <div class="col-md-8">
