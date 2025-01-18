@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title_addition %} - Add Category{% endblock %}
+
+{% block content %}
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-uppercase">Add Category</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" id="add-category-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Category Details</legend>
+                    {{ form.name|as_crispy_field }}
+                    {{ form.display_name|as_crispy_field }}
+                </fieldset>
+                <div class="mb-3">
+                    <button type="submit" class="btn forward-button">Add Category</button>
+                    <a href="{% url 'manage_shop' %}" class="btn back-button ms-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
