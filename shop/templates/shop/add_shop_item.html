@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title_addition %} - Add Product{% endblock %}
+
+{% block content %}
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-uppercase">Add Product</h2>
+            <hr class="heading-rule">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto">Product Details</legend>
+                    {{ form.name|as_crispy_field }}
+                    {{ form.sku|as_crispy_field }}
+                    {{ form.category|as_crispy_field }}
+                    {{ form.description|as_crispy_field }}
+                    {{ form.price|as_crispy_field }}
+                    {{ form.image_url|as_crispy_field }}
+                    {{ form.image|as_crispy_field }}
+                </fieldset>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn forward-button">Add Product</button>
+                    <a href="{% url 'manage_shop' %}" class="btn back-button ms-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
