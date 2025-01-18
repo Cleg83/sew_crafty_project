@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category
+from .forms import AddProductForm, AddCategoryForm
 
 def shop_items(request):
     """ Shop view to show all items in the shop """
@@ -65,7 +66,7 @@ def shop_item_info(request, shop_item_id):
 
 
 def manage_shop(request):
-    
+    """A view for the manage shop page"""
     shop_items = Product.objects.all()
     categories = Category.objects.all()
 
@@ -76,5 +77,90 @@ def manage_shop(request):
         'categories': categories,
     }
 
+    return render(request, template, context)
+
+
+def add_shop_item(request):
+    """ View to add a new product """
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product added successfully!')
+            return redirect('manage_shop')
+        else:
+            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+    else:
+        form = AddProductForm()
+
+    template = 'shop/add_shop_item.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def edit_shop_item(request, shop_item_id):
+    """ View to edit an existing product """
+    shop_item = get_object_or_404(Product, pk=shop_item_id)
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, request.FILES, instance=shop_item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product updated successfully!')
+            return redirect('manage_shop')
+        else:
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+    else:
+        form = AddProductForm(instance=shop_item)
+
+    template = 'shop/edit_shop_item.html'
+    context = {
+        'form': form,
+        'shop_item': shop_item,
+    }
+    return render(request, template, context)
+
+
+def add_category(request):
+    """View to add a new category."""
+    if request.method == "POST":
+        form = AddCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Category added successfully!")
+            return redirect('manage_shop')  # Redirect to the manage shop page or another relevant page
+        else:
+            messages.error(request, "Failed to add category. Please check the form.")
+    else:
+        form = AddCategoryForm()
+
+    template = 'shop/add_category.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def edit_category(request, category_id):
+    """View to edit an existing category."""
+    category = get_object_or_404(Category, pk=category_id)
+
+    if request.method == "POST":
+        form = AddCategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Category updated successfully!")
+            return redirect('manage_shop')  # Redirect to the manage shop page or another relevant page
+        else:
+            messages.error(request, "Failed to update category. Please check the form.")
+    else:
+        form = AddCategoryForm(instance=category)
+
+    template = 'shop/edit_category.html'
+    context = {
+        'form': form,
+        'category': category,
+    }
     return render(request, template, context)
 
