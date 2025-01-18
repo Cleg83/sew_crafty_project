@@ -13,13 +13,20 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6 mb-3">
-            <h5>Categories</h5>
-            <hr class="heading-rule">
+        <div class="col-lg-6 mb-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Categories</h5>
+                </div>
+                <div class="col-md-8">
+                    <a href="{% url 'add_category' %}" class="btn forward-button w-100">Add Category</a>
+                </div>
+            </div>
+            <hr>            
             {% for category in categories %}
                 <div class="card border-0 shadow-lg hover-zoom">
                     <div class="card-body text-dark align-items-center">
-                        <a href="" class="dark-blue-link">
+                        <a href="{% url 'edit_category' category.id %}" class="dark-blue-link">
                             <h5 class="card-title">{{ category.name }}</h5>
                         </a>
                     </div>
@@ -27,13 +34,20 @@
             {% endfor %}
         </div>
         <div class="col-lg-6">
-            <h5>Products</h5>
-            <hr class="heading-rule">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Products</h5>
+                </div>
+                <div class="col-md-8">
+                    <a href="{% url 'add_shop_item' %}" class="btn forward-button w-100">Add Product</a>
+                </div>
+            </div>
+            <hr> 
             {% for shop_item in shop_items %}
                 <div class="card border-0 shadow-lg hover-zoom">
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-4">
-                            <a href=""> 
+                            <a href="{% url 'edit_shop_item' shop_item.id %}"> 
                                 <img 
                                     class="card-img img-fluid shop_card_img" 
                                     src="{{ shop_item.image.url }}" 
@@ -42,7 +56,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body text-dark">
-                                <a href="" class="dark-blue-link">
+                                <a href="{% url 'edit_shop_item' shop_item.id %}" class="dark-blue-link">
                                     <h5 class="card-title">{{ shop_item.name }}</h5>
                                 </a>
                             </div>
