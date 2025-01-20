@@ -39,7 +39,10 @@
                         Can you just mark the item as out of stock?
                     </small>
                 </p>
-                <form action="" method="post" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                <form 
+                    action="{% url 'delete_from_store' item_id=shop_item.id %}" 
+                    method="POST" 
+                    onsubmit="return confirm('Are you sure you want to mark this product as permanently unavailable?');">
                     {% csrf_token %}
                     <button type="submit" class="btn delete-button">Delete Product</button>
                 </form>
