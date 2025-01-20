@@ -16,6 +16,7 @@ class ShopAdmin(admin.ModelAdmin):
     search_fields = ('name', 'sku')
     ordering = ('sku',)
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'display_name',
