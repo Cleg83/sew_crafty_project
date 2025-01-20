@@ -44,26 +44,29 @@
             </div>
             <hr> 
             {% for shop_item in shop_items %}
-                <div class="card border-0 shadow-lg hover-zoom">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col-md-4">
-                            <a href="{% url 'edit_shop_item' shop_item.id %}"> 
-                                <img 
-                                    class="card-img img-fluid shop_card_img" 
-                                    src="{{ shop_item.image.url }}" 
-                                    alt="{{ shop_item.name }}">
+            <div class="card border-0 shadow-lg hover-zoom">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-md-4">
+                        <a href="{% url 'edit_shop_item' shop_item.id %}"> 
+                            <img 
+                                class="card-img img-fluid shop_card_img" 
+                                src="{{ shop_item.image.url }}" 
+                                alt="{{ shop_item.name }}">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body text-dark">
+                            <a href="{% url 'edit_shop_item' shop_item.id %}" class="dark-blue-link">
+                                <h5 class="card-title">{{ shop_item.name }}</h5>
                             </a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-dark">
-                                <a href="{% url 'edit_shop_item' shop_item.id %}" class="dark-blue-link">
-                                    <h5 class="card-title">{{ shop_item.name }}</h5>
-                                </a>
-                            </div>
+                            {% if shop_item.permanently_unavailable %}
+                                <p class="text-danger">Marked as permanently unavailable</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}        
         </div>
     </div>
 </div>
