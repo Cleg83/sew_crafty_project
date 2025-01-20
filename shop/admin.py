@@ -9,10 +9,11 @@ class ShopAdmin(admin.ModelAdmin):
         'name',
         'category',
         'price',
-        'image',
         'in_stock',
+        'permanently_unavailable',
     )
-
+    list_filter = ('category', 'in_stock', 'permanently_unavailable')
+    search_fields = ('name', 'sku')
     ordering = ('sku',)
 
 class CategoryAdmin(admin.ModelAdmin):
