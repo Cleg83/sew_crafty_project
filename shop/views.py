@@ -4,10 +4,11 @@ from django.db.models import Q
 from .models import Product, Category
 from .forms import AddProductForm, AddCategoryForm
 
+
 def shop_items(request):
     """ Shop view to show all items in the shop """
 
-    shop_items = Product.objects.all()
+    shop_items = Product.objects.filter(permanently_unavailable=False)
     query = None
     category_filter = None
     sort_by = None
@@ -122,6 +123,21 @@ def edit_shop_item(request, shop_item_id):
     return render(request, template, context)
 
 
+def delete_from_store(request, item_id):
+    """
+    Marks a shop item as permanently unavailable instead of deleting it.
+    """
+    if not request.user.is_superuser:
+        messages.error(request, "You do not have permission to perform this action.")
+        return redirect('shop')
+
+    shop_item = get_object_or_404(Product, id=item_id)
+    shop_item.permanently_unavailable = True
+    shop_item.save()
+    messages.success(request, f"{shop_item.name} has been marked as permanently unavailable.")
+    return redirect('manage_shop')
+
+
 def add_category(request):
     """View to add a new category."""
     if request.method == "POST":
@@ -129,7 +145,7 @@ def add_category(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Category added successfully!")
-            return redirect('manage_shop')  # Redirect to the manage shop page or another relevant page
+            return redirect('manage_shop')  
         else:
             messages.error(request, "Failed to add category. Please check the form.")
     else:
@@ -151,7 +167,7 @@ def edit_category(request, category_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Category updated successfully!")
-            return redirect('manage_shop')  # Redirect to the manage shop page or another relevant page
+            return redirect('manage_shop')  
         else:
             messages.error(request, "Failed to update category. Please check the form.")
     else:
