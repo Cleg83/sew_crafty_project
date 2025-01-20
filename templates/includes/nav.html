@@ -34,6 +34,7 @@
                             <li><a class="dropdown-item text-light" href="{% url 'user_profile:user_profile' %}">View Profile</a></li> 
                             {% if request.user.is_superuser %}
                                 <li><a class="dropdown-item text-light" href="{% url 'manage_shop' %}">Manage Shop</a></li> 
+                                <li><a class="dropdown-item text-light" href="{% url 'manage_events' %}">Manage Events</a></li> 
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-light" href="{% url 'account_logout' %}">Logout</a></li>
