@@ -3,6 +3,7 @@
     --green: #198754;
     --red: #dc3545;
     --dark: #212529;
+    --grey: #545454;
 }
 
 html {
@@ -39,38 +40,36 @@ body {
     border-radius: 5px;
 }
 
-/* Container to hold the background image */
-.background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Ensures no overflow from scaling */
-    z-index: -1; /* Sends the background behind other content */
+/* Container to hold the home page image */
+.home-image-container {
+    margin: 0 auto; 
+    max-height: 400px;
+    width: 50%;
+    overflow: visible; 
 }
 
-/* Background image element */
-.home-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/media/stall.jpg') no-repeat center center;
-    background-size: cover; /* Ensures the image covers the container */
-    transform: scale(1); /* Initial scale */
-    animation: scaleBackground 5s ease-in-out forwards; /* Apply scale animation */
+/* Home page image element with scaling effect */
+.home-image {
+    max-height: 400px; 
+    transform: scale(0.9); 
+    animation: scaleBackground 5s ease-in-out forwards; 
+    display: block; 
+    object-fit: contain;
 }
 
 /* Keyframes for scaling */
 @keyframes scaleBackground {
     0% {
-        transform: scale(1); /* Start at original size */
+        transform: scale(0.9); /* Start at original size */
     }
     100% {
-        transform: scale(1.1); /* Slightly expand the image */
+        transform: scale(1); /* Slightly expand the image */
     }
+}
+
+.text-section {
+    margin-top: 20px; 
+    text-align: center; 
 }
 
 .navbar-toggler {
@@ -215,4 +214,8 @@ body {
 
 #id_password_helptext {
     display: none;
+}
+
+.form-control {
+    border-color: var(--grey);
 }
