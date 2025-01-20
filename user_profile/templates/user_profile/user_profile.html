@@ -8,7 +8,7 @@
 <div class="container-fluid container-top-margin">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-dark">Your Profile</h2>
+            <h2 class="text-dark text-uppercase">Your Profile</h2>
             <hr class="heading-rule">
         </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="row">
         <!-- Left Column: Address Form -->
         <div class="col-md-6">
-            <form method="POST">
+            <form method="POST" action="{% url 'user_profile:user_profile' %}">
                 {% csrf_token %}
                 <fieldset>
                     <legend class="fieldset_label small bold-font mb-3 w-auto">Personal Details</legend>
