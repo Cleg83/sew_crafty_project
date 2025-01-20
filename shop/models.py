@@ -23,8 +23,12 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=False, blank=False, default='no-image.svg')
     in_stock = models.BooleanField(default=False, null=True, blank=True)
+    permanently_unavailable = models.BooleanField(default=False, help_text="Mark this product as unavailable for sale.")
 
     def __str__(self):
         return self.name
+    
+
+
