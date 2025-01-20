@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title_addition %} - Manage Event{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid container-top-margin-lg">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-dark text-uppercase">Edit Event</h2>
+                <hr class="heading-rule">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <fieldset>
+                        <legend class="fieldset_label small bold-font mb-3 w-auto">Event Details</legend>
+                        {{ form.name|as_crispy_field }}
+                        {{ form.start_date|as_crispy_field }}
+                        {{ form.end_date|as_crispy_field }}
+                        {{ form.start_time|as_crispy_field }}
+                        {{ form.end_time|as_crispy_field }}
+                        {{ form.description|as_crispy_field }}
+                        {{ form.location|as_crispy_field }}
+                        {{ form.image_url|as_crispy_field }}
+                        {{ form.image|as_crispy_field }}
+                        {{ form.ticket_required|as_crispy_field }}
+                        {{ form.ticket_url|as_crispy_field }}
+                    </fieldset>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn forward-button">{{ action }} Event</button>
+                        <a href="{% url 'events_list_view' %}" class="btn back-button ms-2">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
