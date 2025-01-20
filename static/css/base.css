@@ -123,21 +123,21 @@ body {
 }
 
 .shop_card_img {
-    width: 150px; /* Adjust the width as needed */
-    height: 150px; /* Adjust the height as needed */
-    object-fit: cover; /* Ensures the image maintains its aspect ratio and fills the dimensions */
-    border-radius: 5px; /* Optional: Adds a subtle rounding to the corners */
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 5px; 
 }
 
 /* Vertical alignment */
 .align-middle {
-    vertical-align: middle !important;  /* Ensures vertical centering */
+    vertical-align: middle !important;  
 }
 
 /* Buttons */
 
 .forward-button {
-    background-color: var(--green); /* Green for action-forward buttons */
+    background-color: var(--green); 
     color: #fff;
 }
 
