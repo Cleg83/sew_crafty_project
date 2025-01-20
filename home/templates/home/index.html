@@ -3,16 +3,28 @@
 {% load static %}
 
 {% block content %}
-    <div class="background-container">
-        <div class="home-background"></div>
-    </div>
-    <div class="container text-center mt-5">
-        <h1>Hi, I'm Ash!</h1>
-        <p class="lead">Thank you for visiting my site. Here you can purchase items from my shop and see which upcoming events I'll be attending.</p>
-    
-        <div class="d-flex justify-content-center mt-4">
-            <a href="{% url 'shop' %}" class="btn btn-primary mx-2">Visit the Shop</a>
-            <a href="{% url 'events' %}" class="btn btn-secondary mx-2">Upcoming Events</a>
+<div class="container-fluid container-top-margin-lg">
+    <div class="row">
+        <!-- Image container -->
+        <div class="col-12">
+            <div class="home-image-container">
+                <img src="media/logo.jpg" alt="Stall" class="home-image">
+            </div>
+        </div>
+
+        <!-- Heading and text section -->
+        <div class="col-12 text-section">
+            <h1>Hi, I'm Ash!</h1>
+            <p class="lead">
+                Thank you for visiting my site. 
+                Here you can purchase items from my shop and see which upcoming events I'll be attending.
+            </p>
+
+            <div class="d-flex justify-content-center mt-4">
+                <a href="{% url 'shop' %}" class="btn btn-primary mx-2">Visit the Shop</a>
+                <a href="{% url 'events' %}" class="btn btn-secondary mx-2">Upcoming Events</a>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
