@@ -4,6 +4,7 @@ from .models import UserProfile
 from checkout.models import Order  
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def user_profile(request):
     
@@ -14,7 +15,8 @@ def user_profile(request):
         user_profile_form = UserProfileForm(request.POST, instance=user_profile)
         if user_profile_form.is_valid():
             user_profile_form.save()
-            return redirect('user_profile')  
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('user_profile:user_profile')  
     else:
         user_profile_form = UserProfileForm(instance=user_profile)
     
@@ -35,6 +37,7 @@ def get_user_profile_info(request):
         # Prepare profile data for the response
         profile_data = {
             "first_name": user_profile.default_first_name,
+            "last_name": user_profile.default_last_name,
             "email": user_profile.default_email,
             "phone_number": user_profile.default_phone_number,
             "address_1": user_profile.default_address_1,
