@@ -4,6 +4,7 @@
     --red: #dc3545;
     --dark: #212529;
     --grey: #545454;
+    --pink: #b32fba;
 }
 
 html {
@@ -178,6 +179,28 @@ body {
     background-color: #fff;
     color: var(--red);
     border: 1px solid var(--red);
+}
+
+.footer-button {
+    background-color: var(--pink)
+}
+
+.footer-button:hover {
+    background-color: #fff;
+    color: var(--pink);
+    border: 1px solid var(--pink);
+}
+
+.footer-button:hover i {
+    color: var(--pink);
+}
+
+#copyright-link {
+    text-decoration: none;
+}
+
+#copyright-link:hover span {
+    color: var(--pink)
 }
 
 /* Table styling */
