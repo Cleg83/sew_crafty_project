@@ -38,6 +38,24 @@
                 
                 <button type="submit" class="btn forward-button">Save</button>
             </form>
+
+            <div class="mt-4 mb-4">
+                <h4 class="text-danger text-uppercase">Danger Zone</h4>
+                <p>
+                    <small class="text-danger">
+                        Please consider whether deleting your profile is necessary.
+                        You will lose access to your order history.
+                    </small>
+                </p>
+                <form 
+                    action="{% url 'user_profile:delete_user_profile' %}" 
+                    method="POST" 
+                    onsubmit="return confirm('Are you sure you want to delete your profile?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn delete-button">Delete Profile</button>
+                </form>
+            </div>
+
         </div>
 
         <!-- Right Column: Order History -->
@@ -50,7 +68,7 @@
                             <strong>Order #{{ order.order_number }}</strong><br>
                             Date: {{ order.date }}<br>
                             Total: £{{ order.grand_total }}<br>
-                            <a href="" class="dark-blue-link">View Details</a>
+                            <a href="{% url 'user_profile:order_info' order.id %}" class="dark-blue-link">View Details</a>
                         </li>
                     {% endfor %}
                 </ul>
