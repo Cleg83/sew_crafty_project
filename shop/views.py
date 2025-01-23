@@ -68,6 +68,13 @@ def shop_item_info(request, shop_item_id):
 
 def manage_shop(request):
     """A view for the manage shop page"""
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to access this page."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
+    
     shop_items = Product.objects.all()
     categories = Category.objects.all()
 
@@ -83,6 +90,13 @@ def manage_shop(request):
 
 def add_shop_item(request):
     """ View to add a new product """
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to perform this action."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
+    
     if request.method == 'POST':
         form = AddProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -103,6 +117,13 @@ def add_shop_item(request):
 
 def edit_shop_item(request, shop_item_id):
     """ View to edit an existing product """
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to perform this action."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
+
     shop_item = get_object_or_404(Product, pk=shop_item_id)
     if request.method == 'POST':
         form = AddProductForm(request.POST, request.FILES, instance=shop_item)
@@ -127,9 +148,12 @@ def delete_from_store(request, item_id):
     """
     Marks a shop item as permanently unavailable instead of deleting it.
     """
-    if not request.user.is_superuser:
-        messages.error(request, "You do not have permission to perform this action.")
-        return redirect('shop')
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to perform this action."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
 
     shop_item = get_object_or_404(Product, id=item_id)
     shop_item.permanently_unavailable = True
@@ -140,6 +164,13 @@ def delete_from_store(request, item_id):
 
 def add_category(request):
     """View to add a new category."""
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to perform this action."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
+    
     if request.method == "POST":
         form = AddCategoryForm(request.POST)
         if form.is_valid():
@@ -160,6 +191,13 @@ def add_category(request):
 
 def edit_category(request, category_id):
     """View to edit an existing category."""
+    if not (request.user.is_authenticated and request.user.is_superuser):
+        messages.error(
+            request, 
+            "You need to log in and have the necessary permissions to perform this action."
+        )
+        return redirect('account_login' if not request.user.is_authenticated else 'shop')
+    
     category = get_object_or_404(Category, pk=category_id)
 
     if request.method == "POST":
