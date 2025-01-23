@@ -228,7 +228,7 @@ STANDARD_DELIVERY_COST = 3.99
 STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC = env.STRIPE_PUBLIC
 STRIPE_SECRET = env.STRIPE_SECRET
-STRIPE_WH_SECRET = env.STRIPE_WH_SECRET
+STRIPE_ENDPOINT_SECRET = env.STRIPE_ENDPOINT_SECRET
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
