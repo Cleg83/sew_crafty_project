@@ -47,7 +47,7 @@
                                 <hr>
                                 {% if event.ticket_required %}
                                     <div id="ticket-info">
-                                        <p>A ticket is required for this event!</p>
+                                        <p class="text-danger"><strong>A ticket is required for this event.</strong></p>
                                         {% if event.ticket_url %}
                                             <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">Buy Here</a>
                                         {% else %}
