@@ -44,14 +44,14 @@ body {
 /* Container to hold the home page image */
 .home-image-container {
     margin: 0 auto; 
-    max-height: 400px;
+    max-height: 350px;
     width: 50%;
     overflow: visible; 
 }
 
 /* Home page image element with scaling effect */
 .home-image {
-    max-height: 400px; 
+    max-height: 350px; 
     transform: scale(0.9); 
     animation: scaleBackground 5s ease-in-out forwards; 
     display: block; 
@@ -181,17 +181,18 @@ body {
     border: 1px solid var(--red);
 }
 
-.footer-button {
+.home-page-button {
     background-color: var(--pink)
 }
 
-.footer-button:hover {
+.home-page-button:hover {
     background-color: #fff;
     color: var(--pink);
     border: 1px solid var(--pink);
 }
 
-.footer-button:hover i {
+.home-page-button:hover i,
+.home-page-button:hover span {
     color: var(--pink);
 }
 
@@ -242,3 +243,4 @@ body {
 .form-control {
     border-color: var(--grey);
 }
+
