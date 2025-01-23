@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title_addition %} - Order Info{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container container-top-margin-lg">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 border shadow-sm p-4 rounded">
+            
+            <!-- Logo section -->
+            <div class="text-center mb-4">
+                <img src="{{ MEDIA_URL }}logo.jpg" height="75" alt="Logo">
+            </div>
+            
+            <!-- Order confirmation content -->
+            <h2 class="text-center mt-3">Completed Order Details</h2>
+            <hr>
+            <p class="text-center">Order information below. A confirmation email was sent to 
+                <span class="bold-font">{{ order.email }}</span>
+                when the order was placed.
+            </p>
+            
+            <!-- Order Info -->
+            <h4 class="text-center mt-3">Order Info</h4>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+                    <p><strong>Date:</strong> {{ order.date }}</p>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- Order items -->
+            <h5 class="mt-3">Items</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-dark text-light">
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.lineitems.all %}
+                            <tr>
+                                <td>{{ item.shop_item.name }}</td>
+                                <td class="text-center">{{ item.quantity }}</td>
+                                <td class="text-center">£{{ item.shop_item.price|floatformat:2 }}</td>
+                                <td class="text-center">£{{ item.item_total|floatformat:2 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+            
+            <!-- Delivery Info -->
+            <h5>Delivery Info</h5>
+            <p>{{ order.first_name }} {{ order.last_name }}</p>
+            <p>{{ order.address_1 }}</p>
+            {% if order.address_2 %}<p>{{ order.address_2 }}</p>{% endif %}
+            <p>{{ order.town }}</p>
+            {% if order.county %}<p>{{ order.county }}</p>{% endif %}
+            {% if order.postcode %}<p>{{ order.postcode }}</p>{% endif %}
+            <p>{{ order.country }}</p>
+            <p>{{ order.phone_number }}</p>
+
+            <hr>
+            
+            <!-- Billing Info -->
+            <h5>Billing Info</h5>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p><strong>Order Total:</strong> £{{ order.order_total|floatformat:2 }}</p>
+                    <p><strong>Postage Fee:</strong> £{{ order.delivery_fee|floatformat:2 }}</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p><strong>Grand Total:</strong> £{{ order.grand_total|floatformat:2 }}</p>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- Return to Home Button -->
+            <div class="text-center">
+                <a href="{% url 'user_profile:user_profile' %}" class="btn rounded-2 back-button mb-3">
+                    <span>Back To Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
