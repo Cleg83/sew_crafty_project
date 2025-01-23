@@ -68,7 +68,7 @@ def shop_item_info(request, shop_item_id):
 
 def manage_shop(request):
     """A view for the manage shop page"""
-    if not  request.user.is_superuser:
+    if not request.user.is_superuser:
         messages.error(
             request, 
             "You do not have the necessary permissions to access this page."
