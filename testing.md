@@ -1,6 +1,12 @@
-# Full manual testing for Sew Crafty
+# Testing performed for Sew Crafty
 
-## Navbar
+## Automated Testing
+
+Some automated tests were written for the [checkout app](/checkout/tests.py), and the [user profile_app](/user_profile/tests.py).
+
+## Manual Testing
+
+### Navbar
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
@@ -13,7 +19,7 @@
 | Login / Create Account link | Redirects user to login/create account page | Clicked link | User redirected to login/create account page | Pass |
 | Basket link | Redirects user to basket page | Clicked link | User redirected to basket page | Pass |
 
-## Navbar - Authenticated User
+### Navbar - Authenticated User
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
@@ -27,7 +33,7 @@
 | Logout link | Logs user out and redirects to home page | Clicked link | User logged out and redirected to home page | Pass |
 | Basket link | Redirects user to basket page | Clicked link | User redirected to basket page | Pass |
 
-## Navbar - Superuser
+### Navbar - Superuser
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
@@ -43,14 +49,14 @@
 | Logout link | Logs user out and redirects to home page | Clicked link | User logged out and redirected to home page | Pass |
 | Basket link | Redirects user to basket page | Clicked link | User redirected to basket page | Pass |
 
-## Footer
+### Footer
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
 | Instagram link | Redirects user to Sew Crafty Instagram page in a new tab | Clicked link | User redirected to Sew Crafty Instagram page in a new tab | Pass |
 | Etsy link | Redirects user to Sew Crafty Etsy page in a new tab | Clicked link | User redirected to Sew Crafty Etsy page in a new tab | Pass |
 
-## Home Page
+### Home Page
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
