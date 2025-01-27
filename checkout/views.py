@@ -13,15 +13,22 @@ from user_profile.models import UserProfile
 import stripe
 import json
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 @require_POST
 def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET
-        stripe.PaymentIntent.modify(pid, metadata={
-            'basket': json.dumps(request.session.get('basket', {})),
-            'username': request.user,
-        })
+
+        if not Order.objects.filter(stripe_pid=pid).exists():
+            stripe.PaymentIntent.modify(pid, metadata={
+                'basket': json.dumps(request.session.get('basket', {})),
+                'username': request.user.username,
+            })
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Payment cannot be processed. Please try again later.')
@@ -32,15 +39,11 @@ def checkout(request):
     stripe_public = settings.STRIPE_PUBLIC
     stripe_secret = settings.STRIPE_SECRET
 
-    # Check if user is logged in and has a saved address
+    user_profile = None
+    has_saved_address = False
     if request.user.is_authenticated:
-        try:
-            user_profile = UserProfile.objects.get(user=request.user)
-            has_saved_address = bool(user_profile.default_address_1) 
-        except UserProfile.DoesNotExist:
-            has_saved_address = False
-    else:
-        has_saved_address = False  
+        user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        has_saved_address = bool(user_profile.default_address_1)
 
     if request.method == 'POST':
         basket = request.session.get('basket', {})
@@ -62,28 +65,28 @@ def checkout(request):
 
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
-            order.original_basket = json.dumps(basket)
-
-            # Save the grand total to the order
             basket_to_checkout = basket_contents(request)
             order.grand_total = basket_to_checkout['grand_total']
+            order.original_basket = json.dumps(basket)
+
+            if user_profile:
+                order.user_profile = user_profile
+
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid 
             order.save()
 
-            # Loop through basket and create LineItems
             for item_id, item_data in basket.items():
                 try:
                     shop_item = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):  # Single quantity for each item
-                        line_item = LineItem(
+                    if isinstance(item_data, int):  
+                        LineItem.objects.create(
                             order=order,
                             shop_item=shop_item,
-                            product_name=shop_item.name,  
-                            product_price=shop_item.price,  
+                            product_name=shop_item.name,
+                            product_price=shop_item.price,
                             quantity=item_data,
                         )
-                        line_item.save()
                 except Product.DoesNotExist:
                     messages.error(
                         request,
@@ -107,6 +110,7 @@ def checkout(request):
         checkout_total = basket_to_checkout['grand_total']
         stripe_total = round(checkout_total * 100)
         stripe.api_key = stripe_secret
+
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
@@ -117,13 +121,12 @@ def checkout(request):
     if not stripe_public:
         messages.warning(request, 'Missing stripe public key. Please check environment variables are set correctly.')
 
-    # Pass `has_saved_address` to the template to conditionally render checkboxes
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
         'stripe_public': stripe_public,
         'client_secret': intent.client_secret,
-        'has_saved_address': has_saved_address, 
+        'has_saved_address': has_saved_address,
     }
 
     return render(request, template, context)
@@ -135,10 +138,13 @@ def success(request, order_number):
     """
     order = get_object_or_404(Order, order_number=order_number)
 
+    logger.info(f"Success view hit for order number: {order_number}")
+
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        order.user_profile = profile
-        order.save()
+        profile = UserProfile.objects.filter(user=request.user).first()
+        if profile:
+            order.user_profile = profile
+            order.save()
 
     messages.success(request, f'Order successful! Order number: {order_number}. Confirmation will be sent to {order.email}.')
 
@@ -151,3 +157,4 @@ def success(request, order_number):
     }
 
     return render(request, template, context)
+
