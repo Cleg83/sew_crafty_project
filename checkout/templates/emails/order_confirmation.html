@@ -1,0 +1,114 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .text-center {
+            text-align: center;
+        }
+        .bold-font {
+            font-weight: bold;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Logo Section -->
+        <div class="text-center">
+            <img src="{{ MEDIA_URL }}logo.jpg" height="75" alt="Logo">
+        </div>
+        
+        <!-- Order Confirmation Content -->
+        <h2 class="text-center">Thank you for your order!</h2>
+        <hr>
+        <p class="text-center">Order information below. A confirmation email has been sent to 
+            <span class="bold-font">{{ order.email }}</span>.
+        </p>
+        <p class="text-center">You will receive your order within 3 working days.</p>
+        <hr>
+        
+        <!-- Order Info -->
+        <h4 class="text-center">Order Info</h4>
+        <div>
+            <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+            <p><strong>Date:</strong> {{ order.date }}</p>
+        </div>
+        <hr>
+        
+        <!-- Order Items -->
+        <h4>Items</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.lineitems.all %}
+                <tr>
+                    <td>{{ item.shop_item.name }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-center">£{{ item.shop_item.price|floatformat:2 }}</td>
+                    <td class="text-center">£{{ item.item_total|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        
+        <!-- Delivery Info -->
+        <h4>Delivery Info</h4>
+        <p>{{ order.first_name }} {{ order.last_name }}</p>
+        <p>{{ order.address_1 }}</p>
+        {% if order.address_2 %}<p>{{ order.address_2 }}</p>{% endif %}
+        <p>{{ order.town }}</p>
+        {% if order.county %}<p>{{ order.county }}</p>{% endif %}
+        {% if order.postcode %}<p>{{ order.postcode }}</p>{% endif %}
+        <p>{{ order.country }}</p>
+        <p>{{ order.phone_number }}</p>
+        <hr>
+        
+        <!-- Billing Info -->
+        <h4>Billing Info</h4>
+        <div>
+            <p><strong>Order Total:</strong> £{{ order.order_total|floatformat:2 }}</p>
+            <p><strong>Postage Fee:</strong> £{{ order.delivery_fee|floatformat:2 }}</p>
+            <p><strong>Grand Total:</strong> £{{ order.grand_total|floatformat:2 }}</p>
+        </div>
+        <hr>
+
+        <p>Best regards,<br>Sew Crafty</p>
+        
+    </div>
+</body>
+</html>

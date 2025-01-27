@@ -1,0 +1,48 @@
+Thank you for your order, {{ order.first_name }} {{ order.last_name }}!
+
+Your order number is {{ order.order_number }}.
+
+You will receive your order within 3 working days. Below are the details of your order:
+
+-------------------------------------------------
+Order Info:
+-------------------------------------------------
+Order Number: {{ order.order_number }}
+Date: {{ order.date }}
+
+-------------------------------------------------
+Items:
+-------------------------------------------------
+{% for item in order.lineitems.all %}
+{{ item.shop_item.name }} x{{ item.quantity }} - £{{ item.item_total|floatformat:2 }}
+{% endfor %}
+
+-------------------------------------------------
+Delivery Info:
+-------------------------------------------------
+{{ order.first_name }} {{ order.last_name }}
+{{ order.address_1 }}
+{% if order.address_2 %}
+{{ order.address_2 }}
+{% endif %}
+{{ order.town }}
+{% if order.county %}
+{{ order.county }}
+{% endif %}
+{% if order.postcode %}
+{{ order.postcode }}
+{% endif %}
+{{ order.country }}
+{{ order.phone_number }}
+
+-------------------------------------------------
+Billing Info:
+-------------------------------------------------
+Order Total: £{{ order.order_total|floatformat:2 }}
+Postage Fee: £{{ order.delivery_fee|floatformat:2 }}
+Grand Total: £{{ order.grand_total|floatformat:2 }}
+
+Thank you for shopping with us! 
+
+Best regards,
+Sew Crafty
