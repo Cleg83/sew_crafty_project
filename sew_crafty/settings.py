@@ -24,6 +24,57 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',  # Change to INFO or WARNING for less verbosity
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'level': 'INFO',  # Logs info and above to the file
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'verbose',
+        },
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/errors.log'),
+            'formatter': 'verbose',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',  # Adjust to WARNING or ERROR in production
+            'propagate': True,
+        },
+        'checkout': {
+            'handlers': ['console', 'file', 'error_file', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.SECRET_KEY
 
@@ -31,6 +82,7 @@ SECRET_KEY = env.SECRET_KEY
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -91,6 +143,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates', 
             BASE_DIR / 'templates' / 'allauth',
+            BASE_DIR / 'checkout' / 'templates' / 'emails',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
