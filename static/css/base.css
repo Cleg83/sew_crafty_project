@@ -86,6 +86,12 @@ body {
     background-color: #484747;
 }
 
+.footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+}
+
 #delivery-banner {
     margin-top: 56px;
 }
@@ -149,14 +155,14 @@ body {
 }
 
 .back-button {
-    background-color: var(--dark);
+    background-color: var(--pink);
     color: #fff;
 }
 
 .back-button:hover {
     background-color: #fff;
-    color: var(--dark);
-    border: 1px solid var(--dark);
+    color: var(--pink);
+    border: 1px solid var(--pink);
 }
 
 .update-button {
