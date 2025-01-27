@@ -20,9 +20,20 @@
                 {% csrf_token %}
             
                 <div class="mb-2">
-                    {% if has_saved_address %}
-                        <label for="use_profile_info"><small class="text-muted">Use saved info</small></label>
-                        <input type="checkbox" id="use_profile_info" data-fetch-url="{% url 'user_profile:get_profile_info' %}">
+                    {% if user.is_authenticated %}
+                        {% if has_saved_address %}
+                            <label for="use_profile_info"><small class="text-muted">Use saved info</small></label>
+                            <input type="checkbox" id="use_profile_info" data-fetch-url="{% url 'user_profile:get_profile_info' %}">
+                        {% else %}
+                            <p><small>Please update your profile to use your saved info.</small></p>
+                        {% endif %}
+                    {% else %}
+                        <p><small>Please 
+                            <a href="{% url 'account_login' %}" class="dark-blue-link">login</a> 
+                            or 
+                            <a href="{% url 'account_signup' %}"class="dark-blue-link">create an account</a> 
+                            to use a saved address and view order history.</small>
+                        </p>
                     {% endif %}
                 </div>
             
@@ -44,13 +55,6 @@
                     {{ order_form.country | as_crispy_field }}
                 </fieldset>
 
-                {% if not has_saved_address %}
-                    <div class="mb-2">
-                        <label for="save_profile_info"><small class="text-muted">Save address to profile</small></label>
-                        <input type="checkbox" id="save_profile_info" name="save_profile_info">
-                    </div>
-                {% endif %}
-            
                 <fieldset>
                     <legend class="fieldset_label small bold-font mb-3 w-auto">Payment</legend>
                     <div class="mb-4" id="payment-info-box"></div>
