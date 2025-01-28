@@ -28,12 +28,6 @@
             <p>
                 {% trans "Don't have an account?" %} <a href="{% url 'account_signup' %}" class="dark-blue-link">{% trans "Sign up here" %}</a>.
             </p>
-            <p>
-                {% trans "Or log in with:" %}
-            </p>
-            <div class="social-login-links">
-                {% include "socialaccount/snippets/login_extra.html" %}
-            </div>
         </div>
     </div>
 </div>
