@@ -1,1 +1,1 @@
-wen: gunicorn sew_crafty_project.wsgi:application
+web: gunicorn sew_crafty_project.wsgi:application
