@@ -77,7 +77,7 @@ LOGGING = {
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.SECRET_KEY
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
@@ -182,37 +182,6 @@ ACCOUNT_USERNAME_MIN_LENGTH = 6
 LOGIN_URL = '/accounts/login/'  
 LOGIN_REDIRECT_URL = '/'  
 
-# Social account settings
-SOCIALACCOUNT_LOGIN_ON_GET = True  
-SOCIALACCOUNT_EMAIL_REQUIRED = True  
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
-
-# Social account providers
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'SCOPE': ['email'],
-        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-        'METHOD': 'oauth2',
-        'VERIFIED_EMAIL': False,
-        'VERSION': 'v10.0',
-    },
-    'google': {
-        'SCOPE': ['email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
-        'OAUTH_PKCE_ENABLED': True,
-    },
-    'instagram': {
-        'SCOPE': ['basic'],
-        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-    },
-    'twitter': {
-        'SCOPE': ['email'],
-    },
-    'twitter_oauth2': {
-        'SCOPE': ['email'],
-    },
-}
-
 # For login forms and redirect URLs
 ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'  
 LOGOUT_REDIRECT_URL = '/'  
@@ -308,9 +277,9 @@ FREE_DELIVERY_ITEM_THRESHOLD = 3
 STANDARD_DELIVERY_COST = 3.99
 
 STRIPE_CURRENCY = 'gbp'
-STRIPE_PUBLIC = env.STRIPE_PUBLIC
-STRIPE_SECRET = env.STRIPE_SECRET
-STRIPE_ENDPOINT_SECRET = env.STRIPE_ENDPOINT_SECRET
+STRIPE_PUBLIC = os.environ.get('STRIPE_PUBLIC', default='')
+STRIPE_SECRET = os.environ.get('STRIPE_SECRET', default='')
+STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET', default='')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
