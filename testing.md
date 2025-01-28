@@ -64,3 +64,9 @@ Some automated tests were written for the [checkout app](/checkout/tests.py), an
 | Visit the Shop link | Redirects user to shop page | Clicked link | User redirected to shop page | Pass |
 | View Upcoming Events link | Redirects user to upcoming events page | Clicked link | User redirected to upcoming events page | Pass |
 
+
+### Shop Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Search Bar | Searches shop and displays related results | 
