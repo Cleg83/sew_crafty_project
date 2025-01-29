@@ -11,3 +11,4 @@ sew_crafty/__pycache__
 env.py
 db.sqlite3
 logs/
+aws/
