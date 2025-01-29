@@ -69,7 +69,7 @@ def add_event(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Event added successfully!')
-            return redirect('events_list_view')  
+            return redirect('manage_events')  
     else:
         form = EventForm()
 
@@ -77,7 +77,7 @@ def add_event(request):
         'form': form,
         'action': 'Add'
     }
-    return render(request, 'events/edit_event.html', context)
+    return render(request, 'events/add_event.html', context)
 
 
 def edit_event(request, event_id):
@@ -91,7 +91,7 @@ def edit_event(request, event_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Event updated successfully!')
-            return redirect('events_list_view')  
+            return redirect('manage_events')  
     else:
         form = EventForm(instance=event)
 
@@ -111,4 +111,4 @@ def delete_event(request, event_id):
     event = get_object_or_404(Events, id=event_id)
     event.delete()
     messages.success(request, 'Event deleted successfully!')
-    return redirect('events_list_view')  
+    return redirect('manage_events')  
