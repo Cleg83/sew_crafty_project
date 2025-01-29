@@ -27,6 +27,8 @@
                         <a href="{% url 'shop' %}" class="btn back-button text-uppercase">Continue Shopping</a>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
+                {% else %}
+                    <a href="{% url 'shop' %}" class="btn back-button text-uppercase mt-2">Continue Shopping</a>
                 {% endif %}
             </div>
         </div>
