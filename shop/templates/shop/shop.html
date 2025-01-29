@@ -34,7 +34,9 @@
                     <select name="category" class="form-control w-100" onchange="this.form.submit()">
                         <option value="">All Categories</option>
                         {% for category in categories %}
-                            <option value="{{ category.id }}" {% if category.id|stringformat:"s" == category_filter %}selected{% endif %}>{{ category.name }}</option>
+                            <option value="{{ category.id }}" {% if category.id|stringformat:"s" == category_filter %}selected{% endif %}>
+                                {{ category.display_name|default:category.name }}
+                            </option>
                         {% endfor %}
                     </select>
                 </form>
@@ -45,6 +47,7 @@
         <div class="row">
             <div class="col-sm-4 mb-3">
                 <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-start">
+                    <input type="hidden" name="category" value="{{ category_filter }}">
                     <select name="sort" class="form-control w-100" onchange="this.form.submit()">
                         <option value="">Sort By</option>
                         <option value="price_low_to_high" {% if sort_by == 'price_low_to_high' %}selected{% endif %}>Price: Low to High</option>
