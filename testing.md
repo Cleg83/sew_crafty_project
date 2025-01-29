@@ -104,14 +104,129 @@ Continue shopping button | redirects user back to shop page | Clicked button | U
 | Product name / link | Redirects user to the info page for the selected item | Clicked link | User redirected to correct item info page | Pass | 
 | Quantity column | Allows user to update quantity, shows success message and refreshes the basket total | Updated quantity | Quantity updated correctly, success message displayed and basket total updated | Pass | 
 | Remove button | Removes selected item / quantity of items from the basket | Clicked button | Basket updated correctly | Pass | 
-| Proceed to checkout button | Redirects user to checkout page | Clicked button | ~User redirected to checkout page | Pass | 
+| Proceed to checkout button | Redirects user to checkout page | Clicked button | User redirected to checkout page | Pass | 
 
 
 ### Checkout Page 
 
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+
+### Events Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+
+### Events Page - List View
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+
+### Sign Up Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Create account button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Create account button - required fields complete | Creates account, logs user in and redirects to home page | Clicked button | Account created, logged user in and redirected to home page | Pass |
+| Log in here link | User is redirected to login page | Clicked link | User redirected to login page | Pass |
 
 
+### Login Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Login button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Login button - required fields complete | Logs user in and redirects to home page | Clicked button | Logged user in and redirected to home page | Pass |
+| Forgot password link | Redirects user to forgotten password page | Clicked link | User redirected to forgotten password page | Pass |
+| Sign up here link | Redirects user to sign up page | Clicked link | User redirected to sign up page | Pass |
+
+### Logout Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Sign out button | Logs user out and redirects to home page | Clicked button | User logged out and redirected to home page | Pass |
+| Cancel link | Cancels sign out and redirects user to home page | Clicked link | User remained logged in and was redirected to home page | Pass |
+
+### User Profile Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+
+## Admin Only
+
+### Manage Shop Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page Load | Shows all categories and all products with buttons to add both | Loaded manage shop page | All categories and products displayed with buttons to add both  | Pass |
+| Add category button | Redirects user to add category page | Clicked button | User redirected to add category page | Pass |
+| Add product button | Redirects user to add product page | Clicked button | User redirected to add product page | Pass |
+
+#### Add Product
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads add product form | Loaded page | Add product form loads | Pass |
+| Add product button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Add product button - required fields complete | Adds product, user is redirected to manage shop page and success message is shown | Clicked button | Category added, user redirected to manage shop page and success message is shown | Pass |
+| Cancel button | Redirects user back to manage events page | Clicked button | User redirected back to manage events page | Pass | 
+
+#### Edit Item
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads edit product form | Loaded page | Edit product form loads | Pass |
+| Save changes button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Save changes button - required fields complete | Updates product, user is redirected to manage shop page and success message is shown | Clicked button | Product updated, user redirected to manage shop page and success message is shown | Pass |
+| Cancel button | Redirects user back to manage shop page | Clicked button | User redirected back to manage shop page | Pass |
+| Delete Product
 
 
+#### Add Category 
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads add category form | Loaded page | Add category form loads | Pass |
+| Add category button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Add category button - required fields complete | Adds category, user is redirected to manage shop page and success message is shown | Clicked button | Category added, user redirected to manage shop page and success message is shown | Pass |
+| Cancel button | Redirects user back to manage shop page | Clicked button | User redirected back to manage shop page | Pass | 
 
 
+#### Edit Category
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads edit category form | Loaded page | Edit category form loads | Pass |
+| Save changes button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Save changes button - required fields complete | Updates category, user is redirected to manage shop page and success message is shown | Clicked button | Category updated, user redirected to manage shop page and success message is shown | Pass |
+| Cancel button | Redirects user back to manage shop page | Clicked button | User redirected back to manage shop page | Pass | 
+
+
+### Manage Events Page
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page Load | Shows all events (with button to edit and delete each event) with a button to add an event | Loaded manage events page | All events shown (with edit and delete buttons) and a button to add an event | Pass |
+| Add event button | Redirects user to add event page | Clicked button | User redirected to add event page | Pass |
+| Edit event button | Redirects user to edit page for selected event | Clicked button | User redirected to correct edit event page | Pass |
+| Delete event button | Displays a confirm message asking if the user is sure they want to delete the event| Clicked button | Confirm message displayed | Pass |
+| Delete event - Popup cancel button | Closes confirm popup | Clicked cancel button | Popup closed | Pass | 
+| Delete event - Popup OK button | Deletes event and success message is shown | Clicked OK button | Event deleted and success message displayed | Pass | 
+
+
+### Add Event 
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads add event page / form | Navigated to add event page | Add event page loads | Pass |
+| Add event button - required fields incomplete | User prompted to complete missing required fields | Tried to add event | User prompted to complete required fields | Pass |
+| Add event button - required fields complete | Adds event and shows success message | Tried to add event | Event added and success message displayed | Pass |
+
+### Edit Event 
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Loads edit event page with pre-populated form | Navigated to edit event page | Edit event page loads with correct information pre-populated | Pass |
+| Update event button - required fields incomplete | User prompted to complete missing required fields | Tried to update event | User prompted to complete required fields | Pass |
+| Update event button - required fields complete | Updates event and shows success message | Tried to update event | Event added and success message displayed | Pass |
+| Cancel button | Redirects user back to manage events page | Clicked button | User redirected back to manage events page | Pass | 
