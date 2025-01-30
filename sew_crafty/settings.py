@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django_countries',
 
     # sew_crafty_project apps
-    'sew_crafty',
     'home',
     'events',
     'shop',
