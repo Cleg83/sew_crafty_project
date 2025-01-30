@@ -81,19 +81,6 @@
                                                 <h5 class="card-title">{{ shop_item.name }}</h5>
                                             </a>
                                             <p class="card-text text-muted">£{{ shop_item.price }}</p>
-                                            {% if not shop_item.in_stock %}
-                                                <div class="mb-2">
-                                                    <p class="mb-0">Currently out of stock</p>
-                                                    <label for="not_in_stock"><small>Mark as in stock</small></label>
-                                                    <input type="checkbox" id="not_in_stock" name="not_in_stock">
-                                                </div>
-                                            {% else %}
-                                                <div class="mb-2">
-                                                    <p class="mb-0">Item in stock</p>
-                                                    <label for="is_in_stock"><small>Mark as out of stock</small></label>
-                                                    <input type="checkbox" id="is_in_stock" name="is_in_stock">
-                                                </div>
-                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
