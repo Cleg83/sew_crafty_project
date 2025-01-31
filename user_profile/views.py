@@ -27,7 +27,7 @@ def user_profile(request):
             messages.success(request, 'Profile updated successfully!')
             return redirect('user_profile:user_profile')
         else:
-            messages.error(request, "Please select a country.")
+            messages.error(request, "Please check form info.")
     else:
         user_profile_form = UserProfileForm(instance=user_profile)
 
