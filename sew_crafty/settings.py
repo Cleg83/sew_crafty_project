@@ -25,15 +25,14 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['sew-crafty-cleg83-7e1cea4bde60.herokuapp.com', 'localhost']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'storages',
-
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +55,7 @@ INSTALLED_APPS = [
     # Other apps
     'crispy_forms',
     'crispy_bootstrap5',
+    'storages',
 ]
 
 MIDDLEWARE = [
