@@ -34,14 +34,29 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].label = False
 
+    # def save(self, commit=True):
+    #     user_profile = super().save(commit=False)
+    #     user = user_profile.user  # Get the linked User instance
+
+    #     # Update the User model fields
+    #     user.first_name = self.cleaned_data['default_first_name']
+    #     user.last_name = self.cleaned_data['default_last_name']
+    #     user.email = self.cleaned_data['default_email']
+
+    #     if commit:
+    #         user.save()  # Save the User instance
+    #         user_profile.save()  # Save the UserProfile instance
+
+    #     return user_profile
+
     def save(self, commit=True):
         user_profile = super().save(commit=False)
         user = user_profile.user  # Get the linked User instance
 
-        # Update the User model fields
-        user.first_name = self.cleaned_data['default_first_name']
-        user.last_name = self.cleaned_data['default_last_name']
-        user.email = self.cleaned_data['default_email']
+        # Ensure None values are saved as empty strings
+        user.first_name = self.cleaned_data.get('default_first_name') or ''
+        user.last_name = self.cleaned_data.get('default_last_name') or ''
+        user.email = self.cleaned_data.get('default_email') or ''
 
         if commit:
             user.save()  # Save the User instance
