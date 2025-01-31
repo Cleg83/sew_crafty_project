@@ -38,7 +38,7 @@
                 
                 <button type="submit" class="btn forward-button">Save</button>
             </form>
-            {% if request.user is not superuser %}
+            {% if not request.user.is_superuser %}
                 <div class="mt-4 mb-4">
                     <h4 class="text-danger text-uppercase">Danger Zone</h4>
                     <p>
