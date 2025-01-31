@@ -86,8 +86,12 @@ body {
     background-color: #484747;
 }
 
+.footer-wrapper {
+    margin-top: auto;
+}
+
 .footer {
-    position: sticky;
+    position: fixed;
     left: 0;
     bottom: 0;
 }
