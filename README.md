@@ -29,50 +29,28 @@ Visit the deployed site here.
   * [Wireframes](#wireframes)
 
 * [Database](#database)
-  * [Database Technologies](#database-technologies)
+  * [Product model](#database-technologies)
   * [Database Schema](#database-schema)
-    * [MainCategory Table](#maincategory-table)
-    * [Subcategory Table](#subcategory-table)
-    * [Tool Table](#tool-table)
-    * [User Table](#user-table)
-    * [MyToolbox Table](#mytoolbox-table)
+    * [MainCategory Table](#product-model)
+    * [Category model](#category-model)
+    * [Order Model](#order-model)
+    * [Line Item model](#line-item-model)
+    * [User Profile model](#user-profile-model)
+    * [Event model](#event-model)
     * [ERD](#erd)
 
 * [Features](#features)
   * [Favicon](#favicon)
   * [Navbar](#navbar)
   * [Footer](#footer)
-  * [Credits Page](#credits-page)
   * [Home Page](#home-page)
-  * [Categories](#categories)
-  * [Tools](#tools)
-  * [Glossary](#glossary) 
-  * [Login](#login)
-  * [Register](#register)
+  * [Delivery Banner](#delivery-banner)
+  * [Shop](#shop)
+  * [Product Page](#product-page)
+  * [Basket](#glossary) 
+  * [Checkout](#login)
+  * [Events](#register)
 
-* [Logged In User Features](#logged-in-user-features)
-  * [My Toolbox](#my-toolbox)
-  * [Profile](#profile)
-    * [Edit Username](#edit-username)
-    * [Edit Password](#edit-password)
-    * [Delete Profile](#delete-profile)
-  * [Admin Features](#admin-user)
-    * [Admin Navbar](#admin-navbar)
-    * [Admin Categories](#admin-categories)
-    * [Add Main Category](#add-main-category)
-    * [Edit Main Category](#edit-main-category)
-    * [Delete Main Category](#delete-main-category)
-    * [Add Subcategory](#add-subcategory)
-    * [Edit Subcategory](#edit-subcategory)
-    * [Delete Subcategory](#delete-subcategory)
-    * [Add Tool](#add-tool)
-      * [Step 1](#step-1)
-      * [Step 2](#step-2)
-      * [Step 3](#step-3)
-    * [Edit Tool](#edit-tool)
-    * [Delete Tool](#delete-tool)
-    * [Manage Users](#manage-users)
-  * [Defense Defense Defense](#defense-defense-defense)
 
 * [Accessibility](#accessibility)
   * [Accessibility Overview](#accessibility-overview)
@@ -404,6 +382,10 @@ The icons utilise the same colour as the logo and all back buttons throughout th
 
 I kept it very simple, only showcasing the logo and providing buttons to navigate to the shop and events pages.
 
+## Delivery banner
+
+The delivery banner only appears on relevant pages (shop, product and basket) and will update dynamically based on how many items are in the basket. 
+
 ## Shop
 
 There are so many great online shop layouts to take inspiration from but I wanted to keep it as sparse as possible while still including all the key info relating to a product (image, name & price).
@@ -416,11 +398,6 @@ The category dropdown filters the products to only show products belonging to th
 
 The sort function sorts as expected and also includes the category filter so if a category is selected, the sorting function only sorts products within that category. 
 
-
-
-## Delivery banner
-
-The delivery banner only appears on relevant pages (shop, product and basket) and will update dynamically based on how many items are in the basket. 
 
 ## Product page
 
