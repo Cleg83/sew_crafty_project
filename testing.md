@@ -4,6 +4,7 @@
 
 Some automated tests were written for the [checkout app](/checkout/tests.py), and the [user profile_app](/user_profile/tests.py).
 
+
 ## Manual Testing
 
 ### Navbar
@@ -18,6 +19,7 @@ Some automated tests were written for the [checkout app](/checkout/tests.py), an
 | Upcoming Events link | Redirects user to upcoming events page | Clicked link | User redirected to upcoming events page | Pass |
 | Login / Create Account link | Redirects user to login/create account page | Clicked link | User redirected to login/create account page | Pass |
 | Basket link | Redirects user to basket page | Clicked link | User redirected to basket page | Pass |
+
 
 ### Navbar - Authenticated User
 
@@ -63,6 +65,12 @@ Some automated tests were written for the [checkout app](/checkout/tests.py), an
 | Home image animation | Sew Crafty Logo expands on page load | Loaded home page | Logo animation played as expected | Pass |
 | Visit the Shop link | Redirects user to shop page | Clicked link | User redirected to shop page | Pass |
 | View Upcoming Events link | Redirects user to upcoming events page | Clicked link | User redirected to upcoming events page | Pass |
+
+### Delivery Banner
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Only shows on related pages (shop, product & basket pages) | Navigated to each of those pages | Delivery banner correctly displayed | Pass | 
+| Text & item count | updates text and item count when user adds or removes something from their basket | Added and removed items from basket | Text & item count updated correctly on basket update | Pass |
 
 
 ### Shop Page
@@ -111,16 +119,36 @@ Continue shopping button | redirects user back to shop page | Clicked button | U
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
+| Use saved info checkbox (authenticated users) | Populates form with user's saved info | Clicked checkbox | Form updated with user's info | Pass | 
+| Create account link (guest users) | Redirects user to sign up page | Clicked link | User redirected to sign up page | Pass |  
+| Login link (guest users) | Redirects user to login page | Clicked link | User redirected to login page | Pass |  
+| Place order button - required fields incomplete | User prompted to complete required fields | Clicked button | User prompted to complete required fields | Pass |
+| Place order button - required fields complete | Successfully completes order and success page loads | Clicked button | Order successfully completed and user success page loads | Pass |
+| Back to basket button | Redirects user to basket page | Clicked button | User redirected to basket page | Pass | 
+| Order summary | Shows correct summary of order about to be placed | Checked that basket contents match order summary | Order summary correct and matches basket contents | Pass | 
+
+### Success Page
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Page load | Shows correct confirmation of the order just placed | Completed an order | Correct order confirmation displayed | Pass |
+| Home button | Redirects user to home page | Clicked button |  User redirected to home page | Pass | 
 
 ### Events Page
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
+| Events list link | Redirects user to events list view | Clicked link | User redirected to events list view | Pass | 
+| Navigation - Forward arrow | Shows the next upcoming event slide | Clicked arrow | Next upcoming event slide shown | Pass |
+| Navigation - Back arrow | Shows the previous upcoming event slide | Clicked arrow | Previous upcoming event slide shown | Pass |
+| Navigation - Carousel Indicators | Loads a slide based on which indicator is clicked | Clicked indicator | Slide loaded | Pass |
 
 ### Events Page - List View
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
+| Page load | Displays events in list, ordered by start date | Loaded page | Events listed in date order | Pass | 
+| Events Carousel link | Redirects user to events carousel | Clicked link | User redirected to events carousel | Pass | 
+| Buy ticket link | Loads purchase link for selected event in new browser tab | Clicked link | Correct purchase link loaded in new window | Pass | 
 
 ### Sign Up Page
 
@@ -129,7 +157,6 @@ Continue shopping button | redirects user back to shop page | Clicked button | U
 | Create account button - required fields incomplete | Prompts user to complete required fields | Clicked button | User prompted to complete required fields | Pass |
 | Create account button - required fields complete | Creates account, logs user in and redirects to home page | Clicked button | Account created, logged user in and redirected to home page | Pass |
 | Log in here link | User is redirected to login page | Clicked link | User redirected to login page | Pass |
-
 
 ### Login Page
 
@@ -147,10 +174,16 @@ Continue shopping button | redirects user back to shop page | Clicked button | U
 | Sign out button | Logs user out and redirects to home page | Clicked button | User logged out and redirected to home page | Pass |
 | Cancel link | Cancels sign out and redirects user to home page | Clicked link | User remained logged in and was redirected to home page | Pass |
 
-### User Profile Page
+### Profile Page
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
+| Profile form | Email field pre-populates on page load | Loaded profile page when logged in | Email field pre-populated | Pass |
+| Save button | Saves information, page reloads and fields are populated | Saved form | Information saved, page reloaded and fields were populated | Pass | 
+| Delete button | Displays an alert / confirm asking if the user wants to delete profile | Clicked button | Alert / confirm displayed | Pass | 
+| Confirm delete popup - Cancel button | Closes popup | Clicked button | Popup closed | Pass | 
+| Confirm delete popup - OK button | Deletes profile, redirects user to sign up page and success message shows | Clicked button | Profile deleted, user redirected to sign up page and success message shown | Pass | 
+| Order history - View details link | Redirects user to the order history page for the selected order | Clicked link | User redirected to the correct order history page | Pass |
 
 ## Admin Only
 
