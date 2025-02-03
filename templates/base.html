@@ -49,6 +49,7 @@
   </head>
 
   <body>
+	<div class="page-wrapper">
 		<header>
 			{% include 'includes/nav.html' %}
 		</header>
@@ -71,15 +72,14 @@
 			</div>
     	{% endif %}
 
-		{% block header %}
-		{% endblock %}
-
 		{% block content %}
 		{% endblock %}
-
+		
 		<div class="footer-wrapper">
 			{% include 'includes/footer.html' %}
 		</div>
+	</div>
+
 
 		{% block post_load_js %}
 		<script type="text/javascript">

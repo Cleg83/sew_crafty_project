@@ -2,20 +2,19 @@ import json
 import stripe
 from django.conf import settings
 from django.http import HttpResponse
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.mail.backends.console import EmailBackend  
 from checkout.models import Order
+from django.template.loader import render_to_string
+
 import logging
-
-
-stripe.api_key = settings.STRIPE_SECRET
-
-logger = logging.getLogger(__name__)
 
 import time
 
-logger = logging.getLogger(__name__)
+stripe.api_key = settings.STRIPE_SECRET
 
+
+logger = logging.getLogger(__name__)
 
 
 def handle_payment_intent_succeeded(event):
@@ -90,44 +89,6 @@ def handle_payment_intent_succeeded(event):
     return HttpResponse(content=f"Order not found for stripe_pid {stripe_pid}", status=404)
 
 
-
-
-def handle_payment_intent_failed(event):
-    """
-    Handle payment_intent.failed event from Stripe.
-    Notifies the user via email about the failed payment.
-    """
-    payment_intent = event['data']['object']  
-    user_email = payment_intent.get('receipt_email')
-    
-    if user_email:
-        send_failure_email(user_email)
-
-
-# def send_confirmation_email(user_email, order):
-#     """
-#     Send a confirmation email to the user using the console email backend for testing.
-#     """
-#     subject = "Order Confirmation"
-#     message = f"Thank you for your order #{order.order_number}. Your payment has been successfully processed."
-
-#     try:
-
-#         email_backend = EmailBackend()
-#         send_mail(
-#             subject,
-#             message,
-#             'from@example.com',  
-#             [user_email],
-#             connection=email_backend  
-#         )
-#         logger.info(f"Confirmation email successfully sent to {user_email}.")
-#     except Exception as e:
-#         logger.error(f"Failed to send confirmation email to {user_email}: {str(e)}")
-
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-
 def send_confirmation_email(order_email, order):
     subject = f"Order Confirmation - {order.order_number}"
 
@@ -141,12 +102,23 @@ def send_confirmation_email(order_email, order):
     email = EmailMultiAlternatives(
         subject,
         text_content,
-        'yourstore@example.com',  # From email
-        [order_email],  # To email
+        settings.DEFAULT_FROM_EMAIL,  
+        [order_email],  
     )
     email.attach_alternative(html_content, "text/html")
     email.send()
+    
 
+def handle_payment_intent_failed(event):
+    """
+    Handle payment_intent.failed event from Stripe.
+    Notifies the user via email about the failed payment.
+    """
+    payment_intent = event['data']['object']  
+    user_email = payment_intent.get('receipt_email')
+    
+    if user_email:
+        send_failure_email(user_email)
 
 
 def send_failure_email(user_email):
@@ -157,8 +129,12 @@ def send_failure_email(user_email):
     message = "We're sorry, but your payment could not be processed. Please try again later."
     
     try:
-        email_backend = EmailBackend() 
-        send_mail(subject, message, 'from@example.com', [user_email], connection=email_backend)  
+        send_mail(
+            subject, 
+            message, 
+            settings.DEFAULT_FROM_EMAIL,
+            [user_email]  
+        )
         logger.info(f"Failure email sent to {user_email}.")
     except Exception as e:
         logger.error(f"Failed to send failure email to {user_email}: {str(e)}")
@@ -184,8 +160,12 @@ def send_error_notification(error_message):
     Send an error notification to the admin using the console email backend for testing.
     """
     try:
-        email_backend = EmailBackend() 
-        send_mail('Stripe Webhook Error', error_message, 'from@example.com', ['admin@example.com'], connection=email_backend)
+        send_mail(
+            'Stripe Webhook Error', 
+            error_message, 
+            settings.DEFAULT_FROM_EMAIL, 
+            settings.EMAIL_HOT_USER,
+        )
         logger.info("Error notification sent to admin.")
     except Exception as e:
         logger.error(f"Failed to send error notification: {str(e)}")

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid container-top-margin-lg min-vh-100">
+    <div class="container-fluid container-top-margin-lg">
         <div class="row">
             <div class="col">
                 <h2 class="text-dark text-uppercase">Events</h2>
@@ -27,7 +27,7 @@
                 <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
                     <div class="row my-auto">
                         <div class="col-sm-7">   
-                            <img src="{{ event.image.url }}" class="d-block w-100 h-100" alt="{{ event.name }}">
+                            <img src="{{ MEDIA }}{{ event.image_url }}" class="d-block w-100 h-100" alt="{{ event.name }}">
                         </div>
                         <div class="col-sm-5">
                             <div class="d-none d-md-block text-center">
