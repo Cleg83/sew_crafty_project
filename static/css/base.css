@@ -7,13 +7,7 @@
     --pink: #b32fba;
 }
 
-html {
-    height: 100%;
-}
-
-body {
-    font-family: 'Quicksand', sans-serif;
-}
+/* Various global styles  */
 
 .text-align-left {
     text-align: left;
@@ -35,13 +29,84 @@ body {
     font-weight: bold;
 }
 
+/* Vertical alignment */
+.align-middle {
+    vertical-align: middle !important;  
+}
+
+
+/* Page layout */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.content {
+    flex-grow: 1; /* Ensures it takes up remaining space */
+}
+
+.container-top-margin {
+    margin-top: 25px;
+}
+
+.container-top-margin-lg {
+    margin-top: 80px;
+}
+
+/* Navbar */
+
 #nav-logo {
     height:40px;
     width: auto;
     border-radius: 5px;
 }
 
-/* Container to hold the home page image */
+.navbar-toggler {
+    background-color: #f8f9fa;
+}
+
+.dropdown-menu {
+    background-color: #000;
+}
+
+.dropdown-menu a:hover,
+.navbar-nav a:hover {
+    background-color: #484747;
+}
+
+/* Footer */
+
+.footer-wrapper {
+    width: 100%;
+}
+
+.footer {
+    width: 100%;
+    position: sticky; 
+    bottom: 0;
+    left: 0;
+}
+
+#delivery-banner {
+    margin-top: 56px;
+}
+
+/* Home page content  */
+
 .home-image-container {
     margin: 0 auto; 
     max-height: 350px;
@@ -49,7 +114,7 @@ body {
     overflow: visible; 
 }
 
-/* Home page image element with scaling effect */
+
 .home-image {
     max-height: 350px; 
     transform: scale(0.9); 
@@ -73,40 +138,7 @@ body {
     text-align: center; 
 }
 
-.navbar-toggler {
-    background-color: #f8f9fa;
-}
-
-.dropdown-menu {
-    background-color: #000;
-}
-
-.dropdown-menu a:hover,
-.navbar-nav a:hover {
-    background-color: #484747;
-}
-
-.footer-wrapper {
-    margin-top: auto;
-}
-
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-}
-
-#delivery-banner {
-    margin-top: 56px;
-}
-
-.container-top-margin {
-    margin-top: 25px;
-}
-
-.container-top-margin-lg {
-    margin-top: 80px;
-}
+/* Events page */
 
 #events_list_link {
     position: relative;
@@ -140,10 +172,6 @@ body {
     border-radius: 5px; 
 }
 
-/* Vertical alignment */
-.align-middle {
-    vertical-align: middle !important;  
-}
 
 /* Buttons */
 
