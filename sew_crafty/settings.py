@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 # DEBUG = True
 
 ALLOWED_HOSTS = ['sew-crafty-cleg83-7e1cea4bde60.herokuapp.com', 'localhost']
@@ -233,15 +233,15 @@ STRIPE_PUBLIC = os.environ.get('STRIPE_PUBLIC', default='')
 STRIPE_SECRET = os.environ.get('STRIPE_SECRET', default='')
 STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET', default='')
 
-if 'DEVELOPMENT' in os.environ:
+if os.environ.get('DEVELOPMENT') == 'True':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
     DEFAULT_FROM_EMAIL = 'sewcrafty@example.com'
 else: 
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = "mail.gmx.com"
+    EMAIL_HOST = "smtp.gmail.com"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True  
-    EMAIL_USE_SSL = False
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  
     DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
