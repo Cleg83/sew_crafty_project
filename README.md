@@ -36,7 +36,6 @@ Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.
     * [Line Item model](#line-item-model)
     * [User Profile model](#user-profile-model)
     * [Event model](#event-model)
-    * [ERD](#erd)
 
 * [Features](#features)
   * [Favicon](#favicon)
@@ -49,6 +48,7 @@ Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.
   * [Basket](#basket) 
   * [Checkout](#checkout)
   * [Events](#events)
+  * [Admin](#admin)
 
 
 * [Accessibility](#accessibility)
@@ -133,7 +133,7 @@ Future updates may include:
 
 ## Summary
 
-This e-commerce platform is designed to support a small business selling handcrafted yarn-based products. By combining a custom online store with an event promotion feature, the website enhances both digital and in-person sales. With scalability in mind, the project provides a solid foundation for future growth, ensuring the business can continue to expand its reach and customer base.
+This e-commerce platform is designed to support a small business selling beautiful, handcrafted products. By combining a custom online store with an event promotion feature, the website enhances both digital and in-person sales. With scalability in mind, the project provides a solid foundation for future growth, ensuring the business can continue to expand its reach and customer base.
 
 # User Stories
 
@@ -435,8 +435,6 @@ Stores information about store events.
 * Normalization: Prevents data redundancy by separating products, orders, and users.
 * Flexibility: Allows easy extension (e.g., adding product variations or order statuses).
 
-### ERD 
-
 <hr>
 
 # Features
@@ -449,17 +447,23 @@ I wanted to navbar to be very simple and intuitive.
 
 I opted to include search bars on the relevant pages rather than clutter the navbar.
 
-![Navbar]()
+The options in the more dropdown will vary, depending on whether a user is a guest user:
 
-The options in the more dropdown will vary, depending on whether a user is a guest user, authenticated user or superuser.
+![Navbar dropdown guest](media/readme-images/nav-dropdown-guest.png)
 
-![Navbar dropdown]()
+Authenticated user:
+
+![Navbar dropdown authenticated](media/readme-images/nav-dropdown-authenticated.png)
+
+Or superuser:
+
+![Navbar dropdown admin](media/readme-images/nav-dropdown-admin.png)
 
 ## Footer
 
 I used a very streamlined footer that contains links to the only other external websites the business uses and also included my GitHub link (as I don't yet have a website I can link to). 
 
-![Footer]()
+![Footer](media/readme-images/footer.png)
 
 The icons utilise the same colour as the logo and all back buttons throughout the site.
 
@@ -503,7 +507,7 @@ The sort function sorts as expected and also includes the category filter so if 
 
 Again, I wanted to keep this simple and uncluttered so there is an image, name, short description, price and quantity selector, as well as add to basket and continue shopping buttons.
 
-![Product page]()
+![Product page](media/readme-images/product-page.png)
 
 If the product is out of stock then the price and add to basket buttons are hidden.
 
@@ -513,11 +517,11 @@ If the product is out of stock then the price and add to basket buttons are hidd
 
 This needed to contain all of the obvious functionality: update quantity of an item and remove the item from the basket. As you can see, the delivery banner updates dynamically when the basket is updated (when the user goes above or below the item threshold for free delivery).
 
-![Basket 1]()
+![Basket 1](media/readme-images/basket1.png)
+
+![Basket 2](media/readme-images/basket2.png)
 
 There is also a handy summary of basket contents and the standard buttons to proceed to checkout or continue shopping. 
-
-![Basket 2]()
 
 ## Checkout
 
@@ -525,37 +529,56 @@ What fun it was creating this. Who doesn't love Stripe and it's a-synchronicitie
 
 So the checkout flow needed to be obvious, uncluttered (are you spotting a minimalist theme here?) and more importantly, functional.
 
-If the user is authenticated then they have an option to use the address that is saved to their profile and upon checking the box, the form is populated with the saved info. 
+If the user is authenticated then they have an option to use the address that is saved to their profile.
 
-![Used saved info dropdown]()
+![Saved info 1](media/readme-images/saved-info1.png)
+
+Upon checking the box, the form is populated with the saved info. 
+
+![Saved info 2](media/readme-images/saved-info2.png)
 
 If the user is not authenticated then there is a link to create an account or login (the session stores the basket contents so the basket is not cleared upon creating an account or logging in).
 
-![Login link]()
+![Checkout login link](media/readme-images/checkout-login-link.png)
 
 If any required fields are not completed, the user is prompted to complete them before they can continue checking out. 
 
-![Checkout form validation]()
+![Checkout form validation](media/readme-images/checkout-form-validation.png)
 
 Upon successful checkout, the success page loads which confirms the order and a confirmation email is sent (the email mirrors the appearance of the checkout success page).
 
-![Checkout success]()
+![Success 1](media/readme-images/success1.png)
+![Success 2](media/readme-images/success2.png)
 
 ## Events
 
 As a lot of business is generated by setting up stalls at various events throughout the country, it made sense to include the event information and ticket links where applicable. 
 
-### Carousel
+The list view also contains a search bar that will only search events and display the filtered results. 
 
-A simple carousel was created, navigated by the forward and back arrows or by clicking on one of the indicators.
+![Events list](media/readme-images/events-list.png)
 
-![Events carousel]()
+## User Profile
 
-### Events list
+The profile page includes a form to save an address (which can be used for faster checkout).
 
-I also included a link to view the events as a list. The list view also contains a search bar that will only search events and display the filtered results. 
+![User profile 1]()
 
-![Events list]()
+The order history contains links for each order so the user can view the details of each successful order/
+
+![User Profile 2](media/readme-images/user-profile2.png)
+
+## Admin
+
+### Forms
+
+Admin user are able to create and edit events, products & categories through the front end. All forms use crispy form formatting.
+
+![Form example 1](media/readme-images/form-example.png)
+
+The editing forms are pre-populated with the event details:
+
+![Form example 1](media/readme-images/form-example2.png)
 
 <hr>
 
@@ -767,6 +790,14 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 ## Lighthouse 
 
 ## JSHint
+
+The only JS files are in the checkout app, one for Stripe and one for retrieving profile info to populate the checkout form.
+
+![Stripe 1](media/readme-images/stripe-jshint.png)
+![Stripe 2](media/readme-images/stripe-jshint2.png)
+![Stripe 3](media/readme-images/stripe-jshint3.png)
+![Get profile info 1](media/readme-images/get-profile-info-jshint.png)
+![Get profile info 2](media/readme-images/get-profile-info-jshint2.png)
 
 ## Bugs
 
