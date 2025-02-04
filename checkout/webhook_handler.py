@@ -8,13 +8,12 @@ from checkout.models import Order
 from django.template.loader import render_to_string
 
 import logging
-
 import time
 
 stripe.api_key = settings.STRIPE_SECRET
 
-
 logger = logging.getLogger(__name__)
+
 
 def handle_payment_intent_succeeded(event):
     """
@@ -22,7 +21,6 @@ def handle_payment_intent_succeeded(event):
     """
     payment_intent = event['data']['object']
     stripe_pid = payment_intent['id']
-    logger.info(f"Received payment_intent.succeeded for {stripe_pid}")
 
     attempt = 1
     order_exists = False
@@ -31,133 +29,46 @@ def handle_payment_intent_succeeded(event):
     while attempt <= 5:
         try:
             order = Order.objects.get(stripe_pid=stripe_pid)
-            logger.info(f"Order found with stripe_pid: {stripe_pid}")
             order_exists = True
             break
         except Order.DoesNotExist:
             attempt += 1
-            logger.info(f"Attempt {attempt} to find order with stripe_pid: {stripe_pid}")
             time.sleep(2)
 
     if order_exists:
-        # Check if the order was already paid
-        if order.status == 'paid':
-            logger.info(f"Order {order.order_number} is already marked as paid.")
-            return HttpResponse(content="Payment already processed.", status=200)
+        if order.stripe_pid == stripe_pid:
 
-        # Retrieve the charge object using payment intent
-        charge_retrieved = False
-        attempt = 1
-        while attempt <= 5 and not charge_retrieved:
-            try:
-                stripe_charge = stripe.Charge.retrieve(payment_intent['latest_charge'])
-                charge_retrieved = True
-                logger.info(f"Charge retrieved successfully: {stripe_charge.id}")
-            except Exception as e:
-                attempt += 1
-                logger.warning(f"Attempt {attempt} to retrieve charge failed: {str(e)}")
-                time.sleep(2)
+            # Retrieve the charge object with retry logic
+            charge_retrieved = False
+            attempt = 1
+            while attempt <= 5 and not charge_retrieved:
+                try:
+                    stripe_charge = stripe.Charge.retrieve(payment_intent['latest_charge'])
+                    charge_retrieved = True
+                except Exception as e:
+                    attempt += 1
+                    time.sleep(2) 
 
-        if not charge_retrieved:
-            logger.error(f"Failed to retrieve charge after {attempt} attempts")
-            return HttpResponse(content="Failed to retrieve charge details.", status=500)
+            if not charge_retrieved:
+                return HttpResponse(content="Failed to retrieve charge details.", status=500)
 
-        # If charge is successful, update the order
-        if stripe_charge.status == 'succeeded':
-            order.stripe_pid = stripe_pid
-            order.stripe_charge_id = stripe_charge.id
-            order.status = 'paid'  # Mark the order as paid
-            order.save()
+            # Validate the charge status
+            if stripe_charge.status == 'succeeded':
+                order.stripe_pid = stripe_pid
+                order.stripe_charge_id = stripe_charge.id  # Save charge ID for reference
+                order.save()
 
-            # Send the confirmation email
-            logger.info(f"Attempting to send confirmation email to {order.email} for order {order.order_number}")
-            send_confirmation_email(order.email, order)
-            logger.info(f"Order {order.order_number} marked as Paid.")
+                # Send confirmation email
+                send_confirmation_email(order.email, order)
+                return HttpResponse(content=f"Payment intent succeeded for Order {order.order_number}.", status=200)
+            else:
+                send_failure_email(order.email)  # Send a failure email if needed
+                return HttpResponse(content=f"Charge failed for Order {order.order_number}.", status=400)
 
-            return HttpResponse(content=f"Payment intent succeeded for Order {order.order_number}.", status=200)
-        else:
-            # Handle charge failure
-            logger.error(f"Charge for order {order.order_number} failed with status: {stripe_charge.status}")
-            send_failure_email(order.email)  # Send a failure email if needed
-            return HttpResponse(content=f"Charge failed for Order {order.order_number}.", status=400)
-
-    # If the order still isn't found, log an error
-    logger.error(f"Order with stripe_pid {stripe_pid} not found after 5 attempts.")
+        return HttpResponse(content="Payment intent already processed.", status=200)
+    
     send_error_notification(f"Order with stripe_pid {stripe_pid} not found after 5 attempts.")
     return HttpResponse(content=f"Order not found for stripe_pid {stripe_pid}", status=404)
-
-
-
-# def handle_payment_intent_succeeded(event):
-#     """
-#     Handle the payment_intent.succeeded webhook from Stripe.
-#     """
-#     payment_intent = event['data']['object']
-#     stripe_pid = payment_intent['id']
-#     logger.info(f"Received payment_intent.succeeded for {stripe_pid}")
-
-#     attempt = 1
-#     order_exists = False
-
-#     # Retry logic to find the order
-#     while attempt <= 5:
-#         try:
-#             order = Order.objects.get(stripe_pid=stripe_pid)
-#             logger.info(f"Order found with stripe_pid: {stripe_pid}")
-#             order_exists = True
-#             break
-#         except Order.DoesNotExist:
-#             attempt += 1
-#             logger.info(f"Attempt {attempt} to find order with stripe_pid: {stripe_pid}")
-#             time.sleep(2)
-
-#     if order_exists:
-#         # If a stripe_pid is found, consider the order already paid
-#         if order.stripe_pid == stripe_pid:
-#             logger.info(f"Order {order.order_number} already has stripe_pid {stripe_pid}.")
-            
-#             # Retrieve the charge object with retry logic
-#             charge_retrieved = False
-#             attempt = 1
-#             while attempt <= 5 and not charge_retrieved:
-#                 try:
-#                     # Retrieve the Charge object using the payment intent's latest charge
-#                     stripe_charge = stripe.Charge.retrieve(payment_intent['latest_charge'])
-#                     charge_retrieved = True
-#                     logger.info(f"Charge retrieved successfully: {stripe_charge.id}")
-#                 except Exception as e:
-#                     attempt += 1
-#                     logger.warning(f"Attempt {attempt} to retrieve charge failed: {str(e)}")
-#                     time.sleep(2) 
-
-#             if not charge_retrieved:
-#                 logger.error(f"Failed to retrieve charge after {attempt} attempts")
-#                 return HttpResponse(content="Failed to retrieve charge details.", status=500)
-
-#             # Validate the charge status
-#             if stripe_charge.status == 'succeeded':
-#                 # If the charge was successful, proceed with marking the order as paid
-#                 order.stripe_pid = stripe_pid
-#                 order.stripe_charge_id = stripe_charge.id  # Save charge ID for reference
-#                 order.save()
-
-#                 # Send confirmation email
-#                 logger.info(f"Attempting to send confirmation email to {order.email} for order {order.order_number}")
-#                 send_confirmation_email(order.email, order)
-#                 logger.info(f"Order {order.order_number} marked as Paid.")
-
-#                 return HttpResponse(content=f"Payment intent succeeded for Order {order.order_number}.", status=200)
-#             else:
-#                 logger.error(f"Charge for order {order.order_number} failed with status: {stripe_charge.status}")
-#                 send_failure_email(order.email)  # Send a failure email if needed
-#                 return HttpResponse(content=f"Charge failed for Order {order.order_number}.", status=400)
-
-#         return HttpResponse(content="Payment intent already processed.", status=200)
-    
-#     # If the order still isn't found, log an error and send a notification
-#     logger.error(f"Order with stripe_pid {stripe_pid} not found after 5 attempts.")
-#     send_error_notification(f"Order with stripe_pid {stripe_pid} not found after 5 attempts.")
-#     return HttpResponse(content=f"Order not found for stripe_pid {stripe_pid}", status=404)
 
 
 def send_confirmation_email(order_email, order):
@@ -206,7 +117,6 @@ def send_failure_email(user_email):
             settings.DEFAULT_FROM_EMAIL,
             [user_email]  
         )
-        logger.info(f"Failure email sent to {user_email}.")
     except Exception as e:
         logger.error(f"Failed to send failure email to {user_email}: {str(e)}")
 
@@ -219,7 +129,6 @@ def handle_generic_error(event):
     # Check if the event type corresponds to a real error event
     if 'error' in event:
         error_message = event['data']['object'].get('message', 'No error message available.')
-        logger.error(f"Error received: {error_message}")
         send_error_notification(f"Error received: {error_message}")
     else:
         # Log the event if it isn't an error
@@ -237,6 +146,5 @@ def send_error_notification(error_message):
             settings.DEFAULT_FROM_EMAIL, 
             settings.EMAIL_HOT_USER,
         )
-        logger.info("Error notification sent to admin.")
     except Exception as e:
         logger.error(f"Failed to send error notification: {str(e)}")

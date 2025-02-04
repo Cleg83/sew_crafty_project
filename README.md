@@ -2,7 +2,7 @@ Sew Crafty is the website for my friend Ash's side hustle.
 
 She makes beautiful & unique items out of yarn (mostly). 
 
-Visit the deployed site here.
+Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.com)
 
 <br>
 
