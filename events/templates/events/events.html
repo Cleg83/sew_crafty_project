@@ -3,88 +3,73 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid container-top-margin-lg">
-        <div class="row">
-            <div class="col">
-                <h2 class="text-dark text-uppercase">Events</h2>
-                <a href="{% url 'events_list_view' %}" id="events_list_link"><small>View as list</small></a>
-                <hr class="heading-rule">
-            </div>
+<div class="container-fluid container-top-margin-lg content">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-dark text-uppercase">Events</h2>
+            <hr class="heading-rule">
         </div>
     </div>
-    <div id="events-carousel" class="carousel slide">
-        <div class="carousel-indicators">
-            {% for event in events %}
-                <button type="button" data-bs-target="#events-carousel" data-bs-slide-to="{{ forloop.counter0 }}" 
-                        class="{% if forloop.first %}active{% endif %}" 
-                        aria-current="{% if forloop.first %}true{% endif %}" 
-                        aria-label="Slide {{ forloop.counter }}">
-                </button>
-            {% endfor %}
+
+    <div class="row">
+        <div class="col-md-8 col-lg-4 mb-3">
+            <form method="GET" action="{% url 'events_list_view' %}" class="d-flex justify-content-start">
+                <input 
+                    class="form-control w-100" 
+                    type="text" 
+                    name="q" 
+                    placeholder="Search events..." 
+                    value="{{ search_criteria|default:'' }}" 
+                    aria-label="Search">
+                <button class="btn forward-button ms-2" type="submit">Search</button>
+            </form>
         </div>
-        <div class="carousel-inner">
-            {% for event in events %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
-                    <div class="row my-auto">
-                        <div class="col-sm-7">   
-                            <img src="{{ event.image.url }}" class="d-block w-100 h-100" alt="{{ event.name }}">
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="d-none d-md-block text-center">
-                                <div id="event-title">
-                                    <h1>{{ event.name }}</h1>
-                                    <p>{{ event.location }}</p>
-                                </div>
-                                <br>
-                                <div id="event-times">
-                                    <h3>{{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}</h3>
-                                    <p>{{ event.start_time }} to {{ event.end_time }}</p>
-                                </div>
-                                <hr>
-                                <div class="event-description text-align-left">
-                                    <p>{{ event.description }}</p>
-                                </div>
-                                <hr>
-                                {% if event.ticket_required %}
-                                    <div id="ticket-info">
-                                        <p class="text-danger"><strong>A ticket is required for this event.</strong></p>
-                                        {% if event.ticket_url %}
-                                            <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">Buy Here</a>
-                                        {% else %}
-                                            <p>Tickets to be purchased on arrival</p>                               
-                                        {% endif %}
-                                    </div>
+    </div>
+
+    <div class="row gy-4">
+        {% for event in events %}
+        <div class="col-12">
+            <div class="card shadow-sm rounded border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h4 class="card-title text-uppercase">{{ event.name }}</h4>
+                            <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
+                            <p class="card-text">
+                                <strong>Dates:</strong> {{ event.start_date }}
+                                {% if event.end_date %}
+                                - {{ event.end_date }}
                                 {% endif %}
-                            </div>  
-                        </div> 
+                            </p>
+                            <p class="card-text">
+                                <strong>Time:</strong> {{ event.start_time }}
+                                {% if event.end_time %}
+                                - {{ event.end_time }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <p class="card-text"><strong>Description:</strong></p>
+                            <p class="card-text">{{ event.description }}</p>
+                        </div>
+                        <div class="col-12 col-md-4 text-center">
+                            <img src="{{ event.image.url }}" class="event-image mb-4" alt="{{event.name}}">
+                            {% if event.ticket_required %}
+                                <p class="card-text text-danger"><strong>A ticket is required for this event</strong></p>
+                                {% if event.ticket_url %}
+                                    <a href="{{ event.ticket_url }}" target="_blank" class="btn forward-button" role="button">
+                                        Buy Tickets
+                                    </a>
+                                {% else %}
+                                    <p>Tickets to be purchased on arrival</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            {% endfor %}  
+            </div>
         </div>
+        {% endfor %}
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#events-carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#events-carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-{% endblock %}
-
-{% block post_load_js %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const eventsListLink = document.getElementById('events_list_link');
-            if (eventsListLink) {
-                eventsListLink.addEventListener('click', function (event) {
-                    // Prevent Bootstrap or other event listeners from interfering
-                    event.stopPropagation();
-
-                    // Navigate to the href
-                    window.location.href = eventsListLink.href;
-                });
-            }
-        });
-    </script>
+</div>
 {% endblock %}

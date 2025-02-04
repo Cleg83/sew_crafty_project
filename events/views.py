@@ -12,19 +12,6 @@ def upcoming_events(request):
 
     today = timezone.now().date()  
     events = Events.objects.filter(start_date__gte=today).order_by('start_date')
-
-    context = {
-        'events': events,
-    }
-
-    return render(request, 'events/events.html', context)
-
-
-def events_list_view(request):
-    """ List view to show upcoming events """
-
-    today = timezone.now().date()  
-    events = Events.objects.filter(start_date__gte=today).order_by('start_date')
     query = None
 
     if request.GET:
@@ -32,7 +19,7 @@ def events_list_view(request):
             query = request.GET['q']
         if not query:
             messages.error(request, 'Please enter some search criteria!')
-            return redirect(reverse('events_list_view'))
+            return redirect(reverse('events'))
 
         queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(location__icontains=query)
         events = events.filter(queries)
@@ -42,7 +29,7 @@ def events_list_view(request):
         'search_criteria': query,
     }
 
-    return render(request, 'events/events_list_view.html', context)
+    return render(request, 'events/events.html', context)
 
 
 def manage_events(request):
