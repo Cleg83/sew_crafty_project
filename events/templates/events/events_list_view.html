@@ -55,8 +55,8 @@
                             <p class="card-text"><strong>Description:</strong></p>
                             <p class="card-text">{{ event.description }}</p>
                         </div>
-                        <div class="col-12 col-md-4 text-center text-md-start">
-                            <img src="{{ event.image.url }}" class="event-image" alt="{{event.name}}">
+                        <div class="col-12 col-md-4 text-center">
+                            <img src="{{ event.image.url }}" class="event-image mb-4" alt="{{event.name}}">
                             {% if event.ticket_required %}
                                 <p class="card-text text-danger"><strong>A ticket is required for this event</strong></p>
                                 {% if event.ticket_url %}
