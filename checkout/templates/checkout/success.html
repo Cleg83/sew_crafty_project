@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title_addition %} - Success{% endblock %}
 {% load static %}
+{% load get_subtotal %}
 
 {% block content %}
 
@@ -52,7 +53,7 @@
                                 <td>{{ item.shop_item.name }}</td>
                                 <td class="text-center">{{ item.quantity }}</td>
                                 <td class="text-center">£{{ item.shop_item.price|floatformat:2 }}</td>
-                                <td class="text-center">£{{ item.item_total|floatformat:2 }}</td>
+                                <td>£{{ item.product_price|get_subtotal:item.quantity }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
