@@ -29,9 +29,8 @@ Visit the deployed site here.
   * [Wireframes](#wireframes)
 
 * [Database](#database)
-  * [Product model](#database-technologies)
   * [Database Schema](#database-schema)
-    * [MainCategory Table](#product-model)
+    * [Product model](#database-technologies)
     * [Category model](#category-model)
     * [Order Model](#order-model)
     * [Line Item model](#line-item-model)
@@ -47,9 +46,9 @@ Visit the deployed site here.
   * [Delivery Banner](#delivery-banner)
   * [Shop](#shop)
   * [Product Page](#product-page)
-  * [Basket](#glossary) 
-  * [Checkout](#login)
-  * [Events](#register)
+  * [Basket](#basket) 
+  * [Checkout](#checkout)
+  * [Events](#events)
 
 
 * [Accessibility](#accessibility)
@@ -69,14 +68,72 @@ Visit the deployed site here.
     * [How to Clone](#how-to-clone)
 
 * [Testing](#testing)
-  * [Manual Testing](#manual-testing)
-  * [Automated Testing](#automated-testing)
-    * [W3C](#w3c)
-    * [Lighthouse](#lighthouse)
-    * [JSHint](#jshint)
-  * [Bugs](#bugs)
+  * [W3C](#w3c)
+  * [Lighthouse](#lighthouse)
+  * [JSHint](#jshint)
+
+* [Bugs](#bugs)
   
 * [Credits](#credits)
+
+# Rationale
+
+## Project Introduction
+
+This project is an e-commerce platform designed for a small business specialising in handcrafted, unique yarn-based products. The website provides a seamless shopping experience, allowing customers to browse and purchase items while also keeping them informed about upcoming events where the shop owner will be selling products in person.
+
+## Motivation and Inspiration
+
+The inspiration for this project comes from the increasing demand for small business owners to establish an online presence. Handmade and artisanal products have a dedicated market, but many small business owners struggle with the technical aspects of setting up an e-commerce site. This project aims to bridge that gap by providing an intuitive and user-friendly platform tailored to the needs of a craft-based business.
+
+## Background Information
+
+In today's digital economy, an online store is essential for small businesses to grow and reach wider audiences. While many sellers rely on platforms like Etsy, having an independent store allows for greater control over branding, pricing, and customer engagement. Additionally, integrating an events section helps small business owners connect with local buyers who prefer to shop in person.
+
+## Project Scope and Limitations
+
+### Scope
+
+  * E-commerce Functionality: Customers can browse products, add them to their basket, and complete purchases using a secure checkout process.
+  * User Profiles: Returning customers can create accounts to save personal details, making checkout faster and order tracking more convenient.
+  * Event Listings: A dedicated events page informs customers about upcoming markets, craft fairs, or exhibitions where the business will have a stall.
+  * Product Management: The shop owner can manage inventory, update product listings, and mark items as out of stock.
+
+### Limitations
+
+ * Single Vendor: The platform is designed for a single business and does not support multi-vendor functionality.
+ * Limited Payment Methods: Initially, only a selected number of payment gateways will be integrated.
+ * Basic Order Tracking: While customers can view their orders, advanced logistics or real-time tracking are not included in this version.
+
+## Problem Statement
+
+Small businesses that specialize in handcrafted products often struggle with setting up an online store that meets their needs without requiring extensive technical knowledge. Existing platforms may be costly, restrictive, or lack the ability to integrate offline sales events, which are crucial for many artisans and craft sellers.
+
+## Proposed Solution
+
+This project provides a custom e-commerce solution with an intuitive interface, streamlined checkout, and an integrated event listing feature. By combining online sales with an events section, the platform ensures customers can both shop online and discover in-person opportunities to support the business.
+
+## Benefits and Advantages
+
+  * Increased Reach: Customers can purchase products anytime, even if they cannot attend in-person events.
+  * Enhanced User Experience: Registered users enjoy a faster checkout process and order history tracking.
+  *  Brand Control: Unlike third-party platforms, this independent store allows full control over branding, pricing, and customer interaction.
+  * Event Promotion: The events page helps drive foot traffic to in-person sales opportunities, fostering community engagement and repeat customers.
+  * Scalability: The platform can grow with the business, allowing for future feature expansions like discount codes, gift cards, or additional payment options.
+
+## Future Versions
+
+Future updates may include:
+
+  * Wishlist Functionality: Allowing users to save products for future purchases.
+  * Expanded Payment Options: Integration with additional payment providers.
+  * Reviews and Ratings: Enabling customers to leave feedback on purchased products.
+  * Enhanced Order Tracking: Providing more detailed shipment tracking options.
+  * Newsletter Sign-Up: Allowing customers to subscribe for updates on new products and upcoming events.
+
+## Summary
+
+This e-commerce platform is designed to support a small business selling handcrafted yarn-based products. By combining a custom online store with an event promotion feature, the website enhances both digital and in-person sales. With scalability in mind, the project provides a solid foundation for future growth, ensuring the business can continue to expand its reach and customer base.
 
 # User Stories
 
@@ -285,7 +342,7 @@ Stores customer orders, including order totals and user details.
 * delivery_fee: Decimal (6,2), default 0. Stores shipping costs.
 * order_total: Decimal (10,2), default 0. Stores the subtotal.
 * grand_total: Decimal (10,2), default 0. Stores the final order total (subtotal + delivery fee).
-* original_basket: Text, stores a JSON representation of the original cart.
+* original_basket: Text, stores a JSON representation of the original basket.
 * stripe_pid: String, stores Stripe transaction ID.
 
 #### Methods:
@@ -417,27 +474,29 @@ I kept it very simple, only showcasing the logo and providing buttons to navigat
 
 The delivery banner only appears on relevant pages (shop, product and basket) and will update dynamically based on how many items are in the basket. 
 
-![Delivery banner]()
+![Delivery banner](media/readme-images/delivery-banner.png)
+
+![Delivery banner 2](media/readme-images/delivery-banner-2.png)
 
 ## Shop
 
 There are so many great online shop layouts to take inspiration from but I wanted to keep it as sparse as possible while still including all the key info relating to a product (image, name & price).
 
-![Shop 1]()
+![Shop 1](media/readme-images/shop-1.png)
 
 As there are not that many products available, it made more sense for each product to appear in it's own column.
 
 The search bar searches items in the shop and filters the results accordingly. 
 
-![Shop search]()
+![Shop search](media/readme-images/shop-search.png)
 
 The category dropdown filters the products to only show products belonging to that category.
 
-![Shop category dropdown]()
+![Shop category dropdown](media/readme-images/shop-category-dropdown.png)
 
 The sort function sorts as expected and also includes the category filter so if a category is selected, the sorting function only sorts products within that category. 
 
-![Shop sort dropdown]()
+![Shop sort dropdown](media/readme-images/shop-sort-dropdown.png)
 
 
 ## Product page
@@ -448,13 +507,17 @@ Again, I wanted to keep this simple and uncluttered so there is an image, name, 
 
 If the product is out of stock then the price and add to basket buttons are hidden.
 
-![Product out of stock]()
+![Product out of stock](media/readme-images/out-of-stock.png)
 
 ## Basket
 
-this needed to contain all of the obvious functionality: update quantity of an item and remove the item from the basket. As you can see, the delivery banner updates dynamically when the basket is updated (when the user goes above or below the item threshold for free delivery).
+This needed to contain all of the obvious functionality: update quantity of an item and remove the item from the basket. As you can see, the delivery banner updates dynamically when the basket is updated (when the user goes above or below the item threshold for free delivery).
+
+![Basket 1]()
 
 There is also a handy summary of basket contents and the standard buttons to proceed to checkout or continue shopping. 
+
+![Basket 2]()
 
 ## Checkout
 
