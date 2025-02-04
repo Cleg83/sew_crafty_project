@@ -172,6 +172,10 @@ body {
     border-radius: 5px; 
 }
 
+.product-image {
+    max-height: 600px;
+}
+
 
 /* Buttons */
 
