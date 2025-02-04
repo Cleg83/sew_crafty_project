@@ -29,11 +29,18 @@
     font-weight: bold;
 }
 
-/* Vertical alignment */
 .align-middle {
     vertical-align: middle !important;  
 }
 
+.dark-blue-link {
+    text-decoration: none;
+    color: var(--blue);
+}
+
+.dark-blue-link:hover {
+    color: var(--green);
+}
 
 /* Page layout */
 
@@ -101,6 +108,16 @@ body {
     left: 0;
 }
 
+#copyright-link {
+    text-decoration: none;
+}
+
+#copyright-link:hover span {
+    color: var(--pink)
+}
+
+/* Delivery banner */
+
 #delivery-banner {
     margin-top: 56px;
 }
@@ -123,13 +140,13 @@ body {
     object-fit: contain;
 }
 
-/* Keyframes for scaling */
+/*  Home page image animation */
 @keyframes scaleBackground {
     0% {
-        transform: scale(0.9); /* Start at original size */
+        transform: scale(0.9); 
     }
     100% {
-        transform: scale(1); /* Slightly expand the image */
+        transform: scale(1); 
     }
 }
 
@@ -140,34 +157,11 @@ body {
 
 /* Events page */
 
-#events_list_link {
-    position: relative;
-    z-index: 9999;
-    text-decoration: none;
-    color: var(--blue);
-}
-
-#events_list_link:hover {
-    color: var(--green);
-}
-
-.carousel-caption {
-    background-color: #000;
-    border: 1px solid var(--green);
-    border-radius: 5px;
-}
-
-#event-title {
-    margin-top: 25px;
-}
-
 .event-image {
     max-height: 75px;
 }
 
-.event-description {
-    padding: 10px;
-}
+/* Shop */
 
 .shop_card_img {
     width: 150px; 
@@ -176,10 +170,11 @@ body {
     border-radius: 5px; 
 }
 
+/* Product page */
+
 .product-image {
     max-height: 600px;
 }
-
 
 /* Buttons */
 
@@ -242,29 +237,13 @@ body {
     color: var(--pink);
 }
 
-#copyright-link {
-    text-decoration: none;
-}
+/* Basket */
 
-#copyright-link:hover span {
-    color: var(--pink)
-}
-
-/* Table styling */
 .basket-table {
     border-collapse: separate;
     border-radius: 5px;
     overflow: hidden;
     border: 1px solid #ddd;
-}
-
-.dark-blue-link {
-    text-decoration: none;
-    color: var(--blue);
-}
-
-.dark-blue-link:hover {
-    color: var(--green);
 }
 
 .basket-img {
