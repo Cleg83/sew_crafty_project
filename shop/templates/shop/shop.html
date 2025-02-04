@@ -64,7 +64,7 @@
         <!-- Shop Items Display -->
         <div class="row">
             {% for shop_item in shop_items %}
-                {% if not shop_item.permanently_unavailable or request.user.is_superuser %}
+                {% if not shop_item.permanently_unavailable %}
                     <div class="col-12 mb-4">
                         <div class="card border-0 shadow-lg hover-zoom">
                             <div class="row no-gutters align-items-center">
