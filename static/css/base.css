@@ -161,6 +161,10 @@ body {
     margin-top: 25px;
 }
 
+.event-image {
+    max-height: 75px;
+}
+
 .event-description {
     padding: 10px;
 }
