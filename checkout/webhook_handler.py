@@ -38,7 +38,7 @@ def handle_payment_intent_succeeded(event):
         except Order.DoesNotExist:
             attempt += 1
             logger.info(f"Attempt {attempt} to find order with stripe_pid: {stripe_pid}")
-            time.sleep(1)
+            time.sleep(2)
 
     if order_exists:
         # If a stripe_pid is found, consider the order already paid
@@ -57,7 +57,7 @@ def handle_payment_intent_succeeded(event):
                 except Exception as e:
                     attempt += 1
                     logger.warning(f"Attempt {attempt} to retrieve charge failed: {str(e)}")
-                    time.sleep(1)  # Retry after 1 second
+                    time.sleep(2) 
 
             if not charge_retrieved:
                 logger.error(f"Failed to retrieve charge after {attempt} attempts")
