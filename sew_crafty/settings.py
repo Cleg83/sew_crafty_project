@@ -27,6 +27,40 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 # DEBUG = True
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # Set to False to use default loggers
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',  # Capture debug-level logs and above
+            'class': 'logging.StreamHandler',  # Outputs logs to the console
+        },
+        'file': {
+            'level': 'DEBUG',  # You can change the level to INFO, ERROR, etc.
+            'class': 'logging.FileHandler',  # Logs to a file
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),  # Path to log file
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],  # Both console and file handlers
+            'level': 'DEBUG',  # Log everything from debug level upwards
+            'propagate': True,  # Propagate logs to higher-level loggers
+        },
+        'django.request': {
+            'handlers': ['file'],  # Log request-specific events to the file
+            'level': 'ERROR',  # Log only errors and above for request events
+            'propagate': False,
+        },
+        'stripe_webhook': {  # Custom logger for your Stripe webhook events
+            'handlers': ['console', 'file'],  # Log both to console and file
+            'level': 'DEBUG',  # Log everything from debug level upwards
+            'propagate': False,  # Don't propagate to parent loggers
+        },
+    },
+}
+
+
 ALLOWED_HOSTS = ['sew-crafty-cleg83-7e1cea4bde60.herokuapp.com', 'localhost']
 
 # Application definition

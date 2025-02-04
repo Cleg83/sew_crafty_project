@@ -6,6 +6,10 @@ import stripe
 
 from .webhook_handler import handle_payment_intent_succeeded, handle_payment_intent_failed, handle_generic_error
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 # Define the Stripe secret key
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -17,6 +21,9 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
+
+    logger.info(f"Received payload: {payload.decode('utf-8')}")
+    logger.info(f"Received Stripe-Signature header: {sig_header}")
 
     # Verify the webhook signature
     try:
