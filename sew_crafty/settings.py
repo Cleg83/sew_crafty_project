@@ -27,34 +27,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "")
 DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 # DEBUG = True
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',  # Capture all logs (or change to INFO for less noise)
-            'class': 'logging.StreamHandler',  # Logs to console
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',  # Change to DEBUG if you want more verbosity
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'ERROR',  # Logs errors for requests
-            'propagate': False,
-        },
-        'stripe_webhook': {
-            'handlers': ['console'],
-            'level': 'DEBUG',  # Logs all webhook-related events
-            'propagate': False,
-        },
-    },
-}
-
 
 ALLOWED_HOSTS = ['sew-crafty-cleg83-7e1cea4bde60.herokuapp.com', 'localhost']
 
