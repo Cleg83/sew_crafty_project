@@ -82,7 +82,11 @@
                                             <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link">
                                                 <h5 class="card-title">{{ shop_item.name }}</h5>
                                             </a>
-                                            <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                                            {% if shop_item.in_stock %}
+                                                <p class="card-text text-muted">£{{ shop_item.price }}</p>
+                                            {% else %}
+                                                <p class="text-danger">Out of stock</p>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
