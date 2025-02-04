@@ -29,33 +29,28 @@ DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,  # Set to False to use default loggers
+    'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',  # Capture debug-level logs and above
-            'class': 'logging.StreamHandler',  # Outputs logs to the console
-        },
-        'file': {
-            'level': 'DEBUG',  # You can change the level to INFO, ERROR, etc.
-            'class': 'logging.FileHandler',  # Logs to a file
-            'filename': os.path.join(BASE_DIR, 'logs/django.log'),  # Path to log file
+            'level': 'DEBUG',  # Capture all logs (or change to INFO for less noise)
+            'class': 'logging.StreamHandler',  # Logs to console
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],  # Both console and file handlers
-            'level': 'DEBUG',  # Log everything from debug level upwards
-            'propagate': True,  # Propagate logs to higher-level loggers
+            'handlers': ['console'],
+            'level': 'INFO',  # Change to DEBUG if you want more verbosity
+            'propagate': True,
         },
         'django.request': {
-            'handlers': ['file'],  # Log request-specific events to the file
-            'level': 'ERROR',  # Log only errors and above for request events
+            'handlers': ['console'],
+            'level': 'ERROR',  # Logs errors for requests
             'propagate': False,
         },
-        'stripe_webhook': {  # Custom logger for your Stripe webhook events
-            'handlers': ['console', 'file'],  # Log both to console and file
-            'level': 'DEBUG',  # Log everything from debug level upwards
-            'propagate': False,  # Don't propagate to parent loggers
+        'stripe_webhook': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # Logs all webhook-related events
+            'propagate': False,
         },
     },
 }
