@@ -238,12 +238,13 @@ if 'DEVELOPMENT' in os.environ:
     DEFAULT_FROM_EMAIL = 'sewcrafty@example.com'
 else: 
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = "smtp-mail.outlook.com"
+    EMAIL_HOST = "mail.gmx.com"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True  
+    EMAIL_USE_SSL = False
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
