@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
+from django.utils import timezone
 
 from .models import Events
 from .forms import EventForm
@@ -9,7 +10,8 @@ from .forms import EventForm
 def upcoming_events(request):
     """ View to show upcoming events """
 
-    events = Events.objects.all().order_by('start_date')
+    today = timezone.now().date()  
+    events = Events.objects.filter(start_date__gte=today).order_by('start_date')
 
     context = {
         'events': events,
@@ -21,7 +23,8 @@ def upcoming_events(request):
 def events_list_view(request):
     """ List view to show upcoming events """
 
-    events = Events.objects.all().order_by('start_date')
+    today = timezone.now().date()  
+    events = Events.objects.filter(start_date__gte=today).order_by('start_date')
     query = None
 
     if request.GET:
