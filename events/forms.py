@@ -6,7 +6,7 @@ class EventForm(forms.ModelForm):
         model = Events
         fields = [
             'name', 'start_date', 'end_date', 'start_time', 'end_time', 
-            'description', 'location', 'image_url', 'image', 'ticket_required', 'ticket_url'
+            'description', 'location', 'image', 'ticket_required', 'ticket_url'
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
@@ -24,7 +24,6 @@ class EventForm(forms.ModelForm):
         self.fields['name'].widget.attrs['placeholder'] = 'Event Name'
         self.fields['ticket_required'].widget.attrs['class'] = 'form-check-input'
         self.fields['image'].widget.attrs['accept'] = 'image/*'
-        self.fields['image_url'].widget.attrs['placeholder'] = 'Event Image URL (optional)'
         self.fields['ticket_url'].widget.attrs['placeholder'] = 'Event Ticket URL (optional)'
 
         # Optional: Apply any other specific styling or attributes as needed
