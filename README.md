@@ -931,6 +931,8 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 ![Password reset](media/readme-images/w3c-allauth-password-reset.png)
 
+<hr>
+
 ## Lighthouse 
 
 Lighthouse testing showed a best practice score of 79 across the site when not in incognito mode, and 100 when ran in incognito mode. This is due to third part cookies which are unavoidable when using Stripe (at least with my limited experience).
@@ -965,6 +967,8 @@ There are also several render blocking resources (Bootstrap, Stripe, AWS & JQuer
 
 ![Lighthouse Profile](media/readme-images/lighthouse-user-profile.png)
 
+<hr>
+
 ## JSHint
 
 The only JS files are in the checkout app, one for Stripe and one for retrieving profile info to populate the checkout form.
@@ -979,6 +983,8 @@ The only JS files are in the checkout app, one for Stripe and one for retrieving
 
 ![Get profile info 1](media/readme-images/get-profile-info-jshint.png)
 ![Get profile info 2](media/readme-images/get-profile-info-jshint2.png)
+
+<hr>
 
 ## Bugs
 
