@@ -75,13 +75,14 @@
                                         <img 
                                             class="card-img img-fluid shop_card_img" 
                                             src="{{ shop_item.image.url }}" 
-                                            alt="{{ shop_item.name }}">
+                                            alt="{{ shop_item.name }}"
+                                            aria-label="Product link">
                                     </a>
                                 </div>
                                 {% if request.user.is_superuser %}
                                     <div class="col-md-6">
                                         <div class="card-body text-dark">
-                                            <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link">
+                                            <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link" aria-label="Product link">
                                                 <h5 class="card-title">{{ shop_item.name }}</h5>
                                             </a>
                                             {% if shop_item.in_stock %}
@@ -97,7 +98,7 @@
                                 {% else %}
                                     <div class="col-md-8">
                                         <div class="card-body text-dark">
-                                            <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link">
+                                            <a href="{% url 'shop_item_info' shop_item.id %}" class="dark-blue-link" aria-label="Product link">
                                                 <h5 class="card-title">{{ shop_item.name }}</h5>
                                             </a>
                                             {% if shop_item.in_stock %}

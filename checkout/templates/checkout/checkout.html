@@ -22,23 +22,23 @@
                 <div class="mb-2">
                     {% if user.is_authenticated %}
                         {% if has_saved_address %}
-                            <label for="use_profile_info"><small class="text-muted">Use saved info</small></label>
+                            <label for="use_profile_info"><small class="text-muted" aria-label="Use saved profile information for checkout">Use saved info</small></label>
                             <input type="checkbox" id="use_profile_info" data-fetch-url="{% url 'user_profile:get_profile_info' %}">
                         {% else %}
                             <p><small>Please update your profile to use your saved info.</small></p>
                         {% endif %}
                     {% else %}
                         <p><small>Please 
-                            <a href="{% url 'account_login' %}" class="dark-blue-link">login</a> 
+                            <a href="{% url 'account_login' %}" class="dark-blue-link" aria-label="Login to your account">login</a> 
                             or 
-                            <a href="{% url 'account_signup' %}"class="dark-blue-link">create an account</a> 
+                            <a href="{% url 'account_signup' %}"class="dark-blue-link" aria-label="Create a new account">create an account</a> 
                             to use a saved address and view order history.</small>
                         </p>
                     {% endif %}
                 </div>
             
                 <fieldset>
-                    <legend class="fieldset_label small bold-font mb-3 w-auto">Personal Details</legend>
+                    <legend class="fieldset_label small bold-font mb-3 w-auto" aria-labelledby="personal-details">Personal Details</legend>
                     {{ order_form.first_name | as_crispy_field }}
                     {{ order_form.last_name | as_crispy_field }}
                     {{ order_form.email | as_crispy_field }} 
@@ -57,13 +57,13 @@
 
                 <fieldset>
                     <legend class="fieldset_label small bold-font mb-3 w-auto">Payment</legend>
-                    <div class="mb-4" id="payment-info-box"></div>
-                    <div class="mb-4 text-danger" id="payment-error-box" role="alert"></div>
+                    <div class="mb-4" id="payment-info-box" aria-live="polite"></div>
+                    <div class="mb-4 text-danger" id="payment-error-box" role="alert" aria-live="assertive"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
 
-                <div class="my-2">
-                    <p>Total to pay: £{{ grand_total | floatformat:2 }}</p>
+                <div class="mt-2 mb-3">
+                    <p><strong aria-label="Total amount to pay">Total to pay: £{{ grand_total | floatformat:2 }}</strong></p>
                 </div>
             
                 <div id="submit-button" class="mb-3">
