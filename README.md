@@ -852,23 +852,81 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 #### Home Page
 
+![Home w3c](media/readme-images/w3c-home.png)
+
 #### Shop
+
+![Shop w3c](media/readme-images/w3c-shop.png)
+
+#### Product 
+
+![Product w3c](media/readme-images/w3c-product.png)
 
 #### Basket
 
+![Basket w3c](media/readme-images/w3c-basket.png)
+
 #### Checkout
+
+![Checkout w3c](media/readme-images/w3c-checkout.png)
 
 #### Checkout Success
 
+![Checkout success w3c](media/readme-images/w3c-success.png)
+
 #### Events
+
+![Events w3c](media/readme-images/w3c-events.png)
 
 #### User Profile
 
+![Profile w3c](media/readme-images/w3c-user-profile.png)
+
 #### Order Info (Completed Order)
+
+![Order info w3c](media/readme-images/w3c-order-info.png)
 
 #### Shop & Event Management
 
+##### Manage Shop
+
+![Order info w3c](media/readme-images/w3c-manage-shop.png)
+
+##### Add Product
+
+![Order info w3c](media/readme-images/w3c-add-product.png)
+
+##### Edit Product
+
+![Order info w3c](media/readme-images/w3c-edit-product.png)
+
+##### Add Category
+
+![Order info w3c](media/readme-images/w3c-add-category.png)
+
+##### Edit Category
+
+![Order info w3c](media/readme-images/w3c-edit-category.png)
+
+##### Manage Events
+
+![Order info w3c](media/readme-images/w3c-manage-events.png)
+
+##### Add Event
+
+![Order info w3c](media/readme-images/w3c-add-event.png)
+
+##### Edit Event
+
+![Order info w3c](media/readme-images/w3c-edit-event.png)
+
 #### Allauth templates
+
+![Login](media/readme-images/w3c-allauth-login.png)
+
+![Logout](media/readme-images/w3c-allauth-logout.png)
+
+![Sign Up](media/readme-images/w3c-allauth-signup.png)
 
 ## Lighthouse 
 

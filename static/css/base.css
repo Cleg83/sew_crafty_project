@@ -248,7 +248,7 @@ body {
 }
 
 .basket-img {
-    max-width: 60px; /* Adjust size of images */
+    max-width: 60px;
     height: auto;
     margin-right: 10px;
 }
