@@ -791,6 +791,32 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 ## W3C
 
+### CSS
+
+![CSS](media/readme-images/w3c-css.png)
+
+### HTML
+
+#### Home Page
+
+#### Shop
+
+#### Basket
+
+#### Checkout
+
+#### Checkout Success
+
+#### Events
+
+#### User Profile
+
+#### Order Info (Completed Order)
+
+#### Shop & Event Management
+
+#### Allauth templates
+
 ## Lighthouse 
 
 ## JSHint
