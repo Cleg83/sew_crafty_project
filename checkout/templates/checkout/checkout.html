@@ -62,12 +62,12 @@
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
 
-                <div class="mt-2 mb-3">
-                    <p><strong aria-label="Total amount to pay">Total to pay: £{{ grand_total | floatformat:2 }}</strong></p>
-                </div>
-
                 <div id="spinner" style="display: none; text-align: center;">
                     <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                </div>
+
+                <div class="mt-2 mb-3">
+                    <p><strong aria-label="Total amount to pay">Total to pay: £{{ grand_total | floatformat:2 }}</strong></p>
                 </div>
             
                 <div id="submit-button" class="mb-3">
