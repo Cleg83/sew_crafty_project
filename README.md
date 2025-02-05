@@ -589,6 +589,56 @@ The editing forms are pre-populated with the event details:
 
 <hr>
 
+# Accessibility
+
+## Accessibility Overview
+
+The Sew Crafty E-Commerce store is designed with accessibility in mind to ensure that all users, including those with disabilities, can navigate and use the features effectively. This section outlines my commitment to accessibility, the standards I follow, and how to use accessibility features within the app.
+
+## Accessibility Standards
+
+The Sew Crafty E-Commerce store strives to adhere to the Web Content Accessibility Guidelines (WCAG) 2.1 at the AA level. Our goal is to provide a user-friendly experience for everyone, including people with visual, auditory, physical, and cognitive disabilities.
+
+## Key Accessibility Features
+
+* Semantic HTML:
+
+  * I have used semantic HTML elements such as header, footer, main, nav, and section to provide clear structure and improve navigation for screen readers.
+
+* Aria Roles and Labels:
+
+  * Aria roles and labels are used to enhance screen reader support and provide additional context where necessary. For example:
+
+    * a tags are labeled with aria-label where needed to clarify their purpose.
+    * Role attributes are replaced with appropriate aria-labels to describe the function of elements, such as menu items and navigation links.
+
+* Keyboard Navigation:
+
+  * All interactive elements, including forms, buttons, and links, are accessible using keyboard navigation.
+
+  * The site ensures that users can navigate through the application using the Tab key and other standard keyboard shortcuts.
+
+* Form Accessibility:
+
+  * Forms include labels associated with input fields using the for attribute to provide clear instructions and improve usability.
+
+  * Error messages and validation cues are communicated clearly to users.
+
+* Contrast and Readability:
+
+  * High-contrast color schemes and readable fonts have been used throughout to ensure that text is easily distinguishable against the background.
+
+* Responsive Design:
+
+  * The application is designed to be responsive, ensuring that it remains accessible and usable across various devices and screen sizes.
+
+* Focus Management:
+
+  * Focus is managed to ensure that users are directed to relevant content and interactive elements appropriately. For example, focus is moved to modals or dynamic content when it is opened.
+
+<br>
+
+
 # Technologies
 
 ## Languages
@@ -826,9 +876,14 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 The only JS files are in the checkout app, one for Stripe and one for retrieving profile info to populate the checkout form.
 
+### Stripe Checkout Elements
+
 ![Stripe 1](media/readme-images/stripe-jshint.png)
 ![Stripe 2](media/readme-images/stripe-jshint2.png)
 ![Stripe 3](media/readme-images/stripe-jshint3.png)
+
+### Get Profile Info
+
 ![Get profile info 1](media/readme-images/get-profile-info-jshint.png)
 ![Get profile info 2](media/readme-images/get-profile-info-jshint2.png)
 

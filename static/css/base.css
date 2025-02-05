@@ -159,6 +159,7 @@ body {
 
 .event-image {
     max-height: 75px;
+    width: 90%;
 }
 
 /* Shop */
@@ -286,6 +287,10 @@ body {
         animation: scaleBackground 3s ease-in-out forwards; 
         display: block; 
         object-fit: contain;
+    }
+
+    .event-image {
+        margin-top: 25px;
     }
 }
 
