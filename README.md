@@ -1,3 +1,5 @@
+![Main home page image](media/readme-images/main-readme-image.png)
+
 ### Sew Crafty is the website for my friend Ash's side hustle.
 
 She makes beautiful & unique items out of yarn (mostly). 
@@ -603,7 +605,7 @@ The Sew Crafty E-Commerce store strives to adhere to the Web Content Accessibili
 
 * Semantic HTML:
 
-  * I have used semantic HTML elements such as header, footer, main, nav, and section to provide clear structure and improve navigation for screen readers.
+  * I have used semantic HTML elements such as header, footer & nav to provide clear structure and improve navigation for screen readers.
 
 * Aria Roles and Labels:
 
@@ -931,23 +933,37 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 ## Lighthouse 
 
-Lighthouse testing showed a best practice score of 79 across the site. This is due to third part cookies which are unavoidable when using Stripe (at least with my limited experience).
+Lighthouse testing showed a best practice score of 79 across the site when not in incognito mode, and 100 when ran in incognito mode. This is due to third part cookies which are unavoidable when using Stripe (at least with my limited experience).
 
 There are also several render blocking resources (Bootstrap, Stripe, AWS & JQuery), which have taken their toll on the performance scores.
 
 ### Home Page
 
+![Lighthouse Home](media/readme-images/lighthouse-home.png)
+
 ### Shop
+
+![Lighthouse Shop](media/readme-images/lighthouse-shop.png)
 
 ### Basket
 
+![Lighthouse Basket](media/readme-images/lighthouse-basket.png)
+
 ### Checkout
+
+![Lighthouse Checkout](media/readme-images/lighthouse-checkout.png)
 
 ### Checkout Success
 
+![Lighthouse Checkout Success](media/readme-images/lighthouse-checkout-success.png)
+
 ### Events
 
+![Lighthouse Events](media/readme-images/lighthouse-events.png)
+
 ### User Profile
+
+![Lighthouse Profile](media/readme-images/lighthouse-user-profile.png)
 
 ## JSHint
 
@@ -966,4 +982,16 @@ The only JS files are in the checkout app, one for Stripe and one for retrieving
 
 ## Bugs
 
+No bugs now but there were several during development (main two below) - NOW SOLVED
+
+* Lineitems not updating before order confirmation email was sent, meaning that although Stripe processed the correct order amount, the confirmation was sent before the database had updated fully. 
+* Webhooks also needed several attempts integrated into them to account for Stripe's asynchronous nature.
+* AWS integration with Django storages - I needed to declare the storages in a list rather (took me a long time to sort this one out).
+
 # Credits
+
+* So many Stack Overflow pages, depending on which issue I was debugging at the time (I foolishly make a note of them at the time)
+* Code Institute Tutors
+  * Roman for pointing out I'd missed the attempt / retry logic in my webhook.
+  * Rebecca for helping me with AWS issues, correctly pointing me in the right direction of a version / compatibility issue.
+* Django forums were also an enormous help. 
