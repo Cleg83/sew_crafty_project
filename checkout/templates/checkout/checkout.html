@@ -61,6 +61,10 @@
                     <div class="mb-4 text-danger" id="payment-error-box" role="alert"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
+
+                <div class="my-2">
+                    <p>Total to pay: £{{ grand_total | floatformat:2 }}</p>
+                </div>
             
                 <div id="submit-button" class="mb-3">
                     <button type="submit" class="btn forward-button">Place Order</button>
