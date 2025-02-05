@@ -24,7 +24,7 @@ Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.
 * [User Stories](#user-stories)
 
 * [Design](#design)
-  * [Color Scheme](#color-scheme)
+  * [Colour Scheme](#colour-scheme)
   * [Typography](#typography)
   * [Wireframes](#wireframes)
 
@@ -110,7 +110,7 @@ In today's digital economy, an online store is essential for small businesses to
 
 ## Problem Statement
 
-Small businesses that specialize in handcrafted products often struggle with setting up an online store that meets their needs without requiring extensive technical knowledge. Existing platforms may be costly, restrictive, or lack the ability to integrate offline sales events, which are crucial for many artisans and craft sellers.
+Small businesses that specialise in handcrafted products often struggle with setting up an online store that meets their needs without requiring extensive technical knowledge. Existing platforms may be costly, restrictive, or lack the ability to integrate offline sales events, which are crucial for many artisans and craft sellers.
 
 ## Proposed Solution
 
@@ -228,15 +228,15 @@ This e-commerce platform is designed to support a small business selling beautif
 
 # Design
 
-## Color Scheme
+## Colour Scheme
 
-![color scheme](media/readme-images/sew-crafty-color-scheme.png)
+![Colour scheme](media/readme-images/sew-crafty-color-scheme.png)
 
-As all pages have a white background, the other colors used needed to contrast well and also provide consistency across pages.
+As all pages have a white background, the other colours used needed to contrast well and also provide consistency across pages.
 
-The defining color of the website is a lovely Steel Pink: #B32FBA. This matches the shade in the logo image found in the navbar, favicon, home page image and all of the back buttons on the site. 
+The defining colour of the website is a lovely Steel Pink: #B32FBA. This matches the shade in the logo image found in the navbar, favicon, home page image and all of the back buttons on the site. 
 
-Most of the colors mirror Bootstrap's pre-defined colors:
+Most of the colours mirror Bootstrap's pre-defined colours:
 
 #212529 matches Bootrstrap Dark
 #198754 matches Bootrstrap Success
@@ -313,7 +313,7 @@ Stores information about products available for purchase.
 
 #### Purpose: 
 
-Organizes products into categories.
+Organises products into categories.
 
 #### Columns:
 
@@ -435,7 +435,7 @@ Stores information about store events.
 ### Benefits of the Schema
 
 * Scalability: Designed to handle many users, products, and orders efficiently.
-* Normalization: Prevents data redundancy by separating products, orders, and users.
+* Normalisation: Prevents data redundancy by separating products, orders, and users.
 * Flexibility: Allows easy extension (e.g., adding product variations or order statuses).
 
 <hr>
@@ -626,7 +626,7 @@ The Sew Crafty E-Commerce store strives to adhere to the Web Content Accessibili
 
 * Contrast and Readability:
 
-  * High-contrast color schemes and readable fonts have been used throughout to ensure that text is easily distinguishable against the background.
+  * High-contrast colour schemes and readable fonts have been used throughout to ensure that text is easily distinguishable against the background.
 
 * Responsive Design:
 
@@ -637,7 +637,6 @@ The Sew Crafty E-Commerce store strives to adhere to the Web Content Accessibili
   * Focus is managed to ensure that users are directed to relevant content and interactive elements appropriately. For example, focus is moved to modals or dynamic content when it is opened.
 
 <br>
-
 
 # Technologies
 
@@ -651,7 +650,7 @@ The Sew Crafty E-Commerce store strives to adhere to the Web Content Accessibili
 ### Frameworks, Libraries and Programs
 
 * Django: A high-level Python web framework that encourages rapid development and clean, pragmatic design. It powers the backend of the app.
-* Django Allauth: A highly customizable authentication library for Django, used for handling user authentication, registration, and social logins.
+* Django Allauth: A highly customisable authentication library for Django, used for handling user authentication, registration, and social logins.
 * Django Crispy Forms: A Django app that helps render forms with Bootstrap styles easily, improving form UI/UX.
 * Django Storages: A collection of custom storage backends for Django, which allows the application to interact with various cloud storage services (like AWS S3).
 * Django Countries: A Django application to store and access country names and related data in a Django model.
@@ -931,6 +930,24 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 ![Password reset](media/readme-images/w3c-allauth-password-reset.png)
 
 ## Lighthouse 
+
+Lighthouse testing showed a best practice score of 79 across the site. This is due to third part cookies which are unavoidable when using Stripe (at least with my limited experience).
+
+There are also several render blocking resources (Bootstrap, Stripe, AWS & JQuery), which have taken their toll on the performance scores.
+
+### Home Page
+
+### Shop
+
+### Basket
+
+### Checkout
+
+### Checkout Success
+
+### Events
+
+### User Profile
 
 ## JSHint
 
