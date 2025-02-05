@@ -48,6 +48,7 @@ Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.
   * [Basket](#basket) 
   * [Checkout](#checkout)
   * [Events](#events)
+  * [User Profile](#user-profile)
   * [Admin](#admin)
 
 
@@ -69,6 +70,8 @@ Visit the deployed site [here](https://sew-crafty-cleg83-7e1cea4bde60.herokuapp.
 
 * [Testing](#testing)
   * [W3C](#w3c)
+    * [CSS](#css)
+    * [HTML](#html)
   * [Lighthouse](#lighthouse)
   * [JSHint](#jshint)
 
@@ -566,7 +569,7 @@ The list view also contains a search bar that will only search events and displa
 
 The profile page includes a form to save an address (which can be used for faster checkout).
 
-![User profile 1]()
+![User profile 1](media/readme-images/user-profile1.png)
 
 The order history contains links for each order so the user can view the details of each successful order/
 
