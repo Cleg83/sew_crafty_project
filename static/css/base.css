@@ -159,7 +159,7 @@ body {
 
 .event-image {
     max-height: 75px;
-    width: 90%;
+    max-width: 90%;
 }
 
 /* Shop */
@@ -290,7 +290,7 @@ body {
     }
 
     .event-image {
-        margin-top: 25px;
+        margin-top: 40px;
     }
 }
 
