@@ -65,7 +65,7 @@ def adjust_basket(request, item_id):
 
     basket = get_basket(request)
     if str(item_id) in basket:
-        basket[str(item_id)] = quantity  # Adjust the quantity
+        basket[str(item_id)] = quantity 
     else:
         messages.warning(request, f"{shop_item.name} is not in your basket.")
 
@@ -80,7 +80,7 @@ def delete_from_basket(request, item_id):
     basket = get_basket(request)
 
     if str(item_id) in basket:
-        del basket[str(item_id)]  # Remove item from basket
+        del basket[str(item_id)] 
         save_basket(request, basket)
         messages.success(request, f'{shop_item.name} removed from your basket.')
     else:

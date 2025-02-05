@@ -9,6 +9,7 @@ from django.contrib.auth import logout
 
 
 def user_profile(request):
+    """A view to show the profile page and order history"""
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to access this page.")
         return redirect('account_login') 
@@ -40,7 +41,7 @@ def user_profile(request):
 
 
 def order_info(request, order_id):
-
+    """A view for the completed order info"""
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to access this page.")
         return redirect('account_login') 
@@ -61,6 +62,7 @@ def order_info(request, order_id):
 
 
 def get_user_profile_info(request):
+    """A view for populating the form if checkbox on checkout page is clicked"""
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to access this page.")
         return redirect('account_login') 
@@ -91,6 +93,7 @@ def get_user_profile_info(request):
     
 
 def delete_user_profile(request):
+    """A view for deleting the user profile"""
     if not request.user.is_authenticated:
         messages.error(request, "You must be logged in to access this page.")
         return redirect('account_login') 

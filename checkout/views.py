@@ -31,6 +31,7 @@ def cache_checkout_data(request):
     
 
 def checkout(request):
+    """Main checkout view"""
     stripe_public = settings.STRIPE_PUBLIC
     stripe_secret = settings.STRIPE_SECRET
 
@@ -128,9 +129,7 @@ def checkout(request):
 
 
 def success(request, order_number):
-    """
-    Handle successful checkouts
-    """
+    """A view rendered on successful checkout"""
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:

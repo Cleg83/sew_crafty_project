@@ -16,14 +16,11 @@ endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
-    # sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     sig_header = request.headers.get("Stripe-Signature", "")
     print("Headers received:", request.headers)
     print("Stripe-Signature:", sig_header)
     event = None
 
-    
-    # Verify the webhook signature
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
