@@ -29,10 +29,7 @@ def handle_payment_intent_succeeded(event):
     # Retry logic to find the order
     while attempt <= 5:
         try:
-            # order = Order.objects.get(stripe_pid=stripe_pid)
-            order = Order.objects.prefetch_related(
-                Prefetch('lineitems', queryset=LineItem.objects.select_related('shop_item'))
-            ).get(stripe_pid=stripe_pid)
+            order = Order.objects.get(stripe_pid=stripe_pid)
             order_exists = True
             break
         except Order.DoesNotExist:
