@@ -928,6 +928,8 @@ For detailed testing, see <a href="https://github.com/Cleg83/sew_crafty_project/
 
 ![Sign Up](media/readme-images/w3c-allauth-signup.png)
 
+![Password reset](media/readme-images/w3c-allauth-password-reset.png)
+
 ## Lighthouse 
 
 ## JSHint
