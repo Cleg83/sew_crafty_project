@@ -135,7 +135,7 @@ body {
 .home-image {
     max-height: 350px; 
     transform: scale(0.9); 
-    animation: scaleBackground 5s ease-in-out forwards; 
+    animation: scaleBackground 3s ease-in-out forwards; 
     display: block; 
     object-fit: contain;
 }
@@ -267,5 +267,25 @@ body {
 
 .form-control {
     border-color: var(--grey);
+}
+
+/* Media queries */
+
+@media screen and (max-width: 768px) {
+    .home-image-container {
+        margin: 0 auto; 
+        max-height: 265px;
+        width: 375px;
+        overflow: visible; 
+    }
+    
+    
+    .home-image {
+        max-height: 265px; 
+        transform: scale(0.9); 
+        animation: scaleBackground 3s ease-in-out forwards; 
+        display: block; 
+        object-fit: contain;
+    }
 }
 
