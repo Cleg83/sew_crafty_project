@@ -32,7 +32,7 @@
             <div class="col-sm-4 mb-3 ms-auto">
                 <form method="GET" action="{% url 'shop' %}" class="d-flex justify-content-end">
                     <label for="category" class="sr-only">Select Category</label>
-                    <select name="category" class="form-control w-100" onchange="this.form.submit()" aria-label="Category Filter">
+                    <select name="category" id="category" class="form-control w-100" onchange="this.form.submit()" aria-label="Category Filter">
                         <option value="">All Categories</option>
                         {% for category in categories %}
                             <option value="{{ category.id }}" {% if category.id|stringformat:"s" == category_filter %}selected{% endif %}>
@@ -52,7 +52,7 @@
                         <input type="hidden" name="category" value="{{ category_filter }}">
                     {% endif %}
                     <label for="sort" class="sr-only">Sort By</label>
-                    <select name="sort" class="form-control w-100" onchange="this.form.submit()">
+                    <select name="sort" id="sort" class="form-control w-100" onchange="this.form.submit()">
                         <option value="">Sort By</option>
                         <option value="price_low_to_high" {% if sort_by == 'price_low_to_high' %}selected{% endif %}>Price: Low to High</option>
                         <option value="price_high_to_low" {% if sort_by == 'price_high_to_low' %}selected{% endif %}>Price: High to Low</option>
