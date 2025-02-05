@@ -330,3 +330,21 @@ body {
     }
 }
 
+@media screen and (max-width: 240px) {
+    .home-image-container {
+        margin: 0 auto; 
+        max-height: 85px;
+        width: 120px;
+        overflow: visible; 
+    }
+    
+    
+    .home-image {
+        max-height: 85px; 
+        transform: scale(0.9); 
+        animation: scaleBackground 3s ease-in-out forwards; 
+        display: block; 
+        object-fit: contain;
+    }
+}
+
