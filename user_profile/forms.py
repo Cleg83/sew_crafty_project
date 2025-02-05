@@ -26,7 +26,7 @@ class UserProfileForm(forms.ModelForm):
             'default_country': 'Country',
             'default_first_name': 'First Name',
             'default_last_name': 'Last Name',
-            'default_email': 'Email',  # Keep placeholder for consistency
+            'default_email': 'Email',  
         }
 
         for field in self.fields:
@@ -37,11 +37,10 @@ class UserProfileForm(forms.ModelForm):
 
     def save(self, commit=True):
         user_profile = super().save(commit=False)
-        user = user_profile.user  # Get the linked User instance
+        user = user_profile.user  
 
         user.first_name = self.cleaned_data.get('default_first_name') or ''
         user.last_name = self.cleaned_data.get('default_last_name') or ''
-        # Do NOT update email
 
         if commit:
             user.save()
