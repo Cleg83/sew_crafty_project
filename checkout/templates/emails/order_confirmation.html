@@ -77,7 +77,7 @@
                     <td>{{ item.shop_item.name }}</td>
                     <td class="text-center">{{ item.quantity }}</td>
                     <td class="text-center">£{{ item.shop_item.price|floatformat:2 }}</td>
-                    <td class="text-center">£{{ item.shop_item.price * item.quantity }}</td>
+                    <td class="text-center">£{{ item.item_total|floatformat:2 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
