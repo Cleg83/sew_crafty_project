@@ -16,6 +16,12 @@ class ShopAdmin(admin.ModelAdmin):
     search_fields = ('name', 'sku')
     ordering = ('sku',)
 
+    # Disables bulk deletion on products
+    actions = None  
+
+    def has_delete_permission(self, request, obj=None):
+        return False  # Completely disables product deletion
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
