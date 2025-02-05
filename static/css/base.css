@@ -272,6 +272,7 @@ body {
 
 /* Media queries */
 
+
 @media screen and (max-width: 768px) {
     .home-image-container {
         margin: 0 auto; 
@@ -287,10 +288,6 @@ body {
         animation: scaleBackground 3s ease-in-out forwards; 
         display: block; 
         object-fit: contain;
-    }
-
-    .update-button {
-        margin-top: 5px;
     }
 
     .event-image {
@@ -350,5 +347,14 @@ body {
         display: block; 
         object-fit: contain;
     }
+}
+
+/* Basket update button specific */
+
+@media screen and (max-width: 790px) {
+    
+    .update-button {
+        margin-top: 5px;
+    }    
 }
 
