@@ -75,6 +75,11 @@ def handle_payment_intent_succeeded(event):
 def send_confirmation_email(order_email, order):
     subject = f"Order Confirmation - {order.order_number}"
 
+    # Force Django to prefetch lineitems and their related shop_items
+    order = Order.objects.prefetch_related(
+        Prefetch('lineitems', queryset=LineItem.objects.select_related('shop_item'))
+    ).get(id=order.id)
+
     # HTML content
     html_content = render_to_string("emails/order_confirmation.html", {'order': order})
     
