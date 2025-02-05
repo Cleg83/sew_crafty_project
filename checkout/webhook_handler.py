@@ -4,8 +4,9 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.mail.backends.console import EmailBackend  
-from checkout.models import Order
+from checkout.models import Order, LineItem
 from django.template.loader import render_to_string
+from django.db.models import Prefetch
 
 import logging
 import time
@@ -28,9 +29,12 @@ def handle_payment_intent_succeeded(event):
     # Retry logic to find the order
     while attempt <= 5:
         try:
-            order = Order.objects.get(stripe_pid=stripe_pid)
-            order_exists = True
-            break
+            # order = Order.objects.get(stripe_pid=stripe_pid)
+            # order_exists = True
+            # break
+            order = Order.objects.prefetch_related(
+                Prefetch('lineitems', queryset=LineItem.objects.select_related('shop_item'))
+            ).get(stripe_pid=stripe_pid)
         except Order.DoesNotExist:
             attempt += 1
             time.sleep(2)
