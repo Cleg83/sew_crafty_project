@@ -59,7 +59,8 @@ def handle_payment_intent_succeeded(event):
                 order.stripe_charge_id = stripe_charge.id  # Save charge ID for reference
                 order.save()
 
-                # Send confirmation email
+                # Send confirmation email with a delay to ensure all lineitems are included in the email 
+                time.sleep(2)
                 send_confirmation_email(order.email, order)
                 return HttpResponse(content=f"Payment intent succeeded for Order {order.order_number}.", status=200)
             else:
