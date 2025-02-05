@@ -441,6 +441,10 @@ Stores information about store events.
 
 ## Favicon
 
+I opted to use the logo of the store for the favicon.
+
+![favicon](media/readme-images/favicon-32x32.png)
+
 ## Navbar
 
 I wanted to navbar to be very simple and intuitive.
